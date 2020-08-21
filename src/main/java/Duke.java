@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
-    static String[] tasks = new String[100];
-    static int numberOfTasks = 0;
+    static Task[] tasks = new Task[100];
+
 
     public static void main(String[] args) {
-        boolean isExit = false;
+        boolean isExit;
         printWelcomeText();
 
         do {
@@ -49,14 +49,16 @@ public class Duke {
     }
 
     public static void insertTask(String newTask) {
-        tasks[numberOfTasks] = newTask;
-        numberOfTasks++;
+        int new_index = Task.getNumberOfTasks();
+        tasks[new_index]= new Task(newTask);
         System.out.println("\t" + "added: " + newTask);
     }
 
     public static void printTaskList() {
-        for (int i = 0; i < numberOfTasks; i++) {
-            System.out.println("\t" +(i+1) + ". " + tasks[i]);
+        int iterations = Task.getNumberOfTasks();
+        for (int i = 0; i < iterations; i++) {
+            System.out.print("\t" +(i+1) + ".[" + tasks[i].getStatusIcon() + "] ");
+            System.out.println(tasks[i].getDescription());
         }
     }
 
