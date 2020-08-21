@@ -1,10 +1,10 @@
 public class Duke {
     public static void main(String[] args) {
-        printWelcome();
-        exitDuke();
+        printWelcomeText();
+        printExitText();
     }
 
-    public static void printWelcome() {
+    public static void printWelcomeText() {
         printHorizontalLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,7 +15,7 @@ public class Duke {
         System.out.println(" What can I do for you?");
     }
 
-    public static void exitDuke() {
+    public static void printExitText() {
         printHorizontalLine();
         System.out.println(" Bye. Hope to see you again soon!");
         printHorizontalLine();
