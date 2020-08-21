@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+    static String[] tasks = new String[100];
+    static int numberOfTasks = 0;
+
     public static void main(String[] args) {
         boolean isExit = false;
         printWelcomeText();
@@ -32,12 +35,29 @@ public class Duke {
         printHorizontalLine();
 
 
-        if (!userCommand.equals("bye")) {
-            System.out.println("\t" + userCommand);
-            printHorizontalLine();
-            return false;
+        if (userCommand.equals("bye")) {
+            return true;
         }
-        return true;
+        else if(userCommand.equals("list")) {
+            printTaskList();
+        }
+        else {
+            insertTask(userCommand);
+        }
+        printHorizontalLine();
+        return false;
+    }
+
+    public static void insertTask(String newTask) {
+        tasks[numberOfTasks] = newTask;
+        numberOfTasks++;
+        System.out.println("\t" + "added: " + newTask);
+    }
+
+    public static void printTaskList() {
+        for (int i = 0; i < numberOfTasks; i++) {
+            System.out.println("\t" +(i+1) + ". " + tasks[i]);
+        }
     }
 
     public static void printExitText() {
