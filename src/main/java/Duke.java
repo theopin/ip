@@ -10,8 +10,7 @@ public class Duke {
 
         do {
             isExit = insertCommand();
-        }
-        while(!isExit);
+        } while(!isExit);
 
         printExitText();
     }
@@ -31,21 +30,38 @@ public class Duke {
     public static boolean insertCommand() {
         String userCommand;
         Scanner myCommand = new Scanner(System.in);
-        userCommand = myCommand.nextLine();
+        userCommand = myCommand.nextLine().trim();
+
+        String userAction = filterUserAction(userCommand);
         printHorizontalLine();
 
-
-        if (userCommand.equals("bye")) {
+        switch (userAction) {
+        case "bye":
             return true;
-        }
-        else if(userCommand.equals("list")) {
+        case "list":
             printTaskList();
-        }
-        else {
+            break;
+        case "done":
+            int taskIndex = extractTaskIndex(userCommand, userAction);
+            setTaskAsComplete(taskIndex);
+            break;
+        default:
             insertTask(userCommand);
+            break;
         }
+
         printHorizontalLine();
         return false;
+    }
+
+    public static String filterUserAction(String userCommand) {
+        String newAction = userCommand.toLowerCase();
+
+        if(newAction.contains(" ")) {
+            newAction = newAction.substring(0, newAction.indexOf(" "));
+        }
+
+        return newAction;
     }
 
     public static void insertTask(String newTask) {
@@ -54,8 +70,24 @@ public class Duke {
         System.out.println("\t" + "added: " + newTask);
     }
 
+    public static int extractTaskIndex(String userCommand, String userAction) {
+        int userActionWordLength = userAction.length();
+        String taskIndex = userCommand.substring(userActionWordLength).trim();
+        return Integer.parseInt(taskIndex);
+    }
+
+    public static void setTaskAsComplete(int index) {
+        index--;
+        tasks[index].setIsDone(true);
+
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.print("\t[" + tasks[index].getStatusIcon() + "] ");
+        System.out.println(tasks[index].getDescription());
+    }
+
     public static void printTaskList() {
         int iterations = Task.getNumberOfTasks();
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < iterations; i++) {
             System.out.print("\t" +(i+1) + ".[" + tasks[i].getStatusIcon() + "] ");
             System.out.println(tasks[i].getDescription());

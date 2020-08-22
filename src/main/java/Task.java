@@ -12,13 +12,13 @@ public class Task {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     //return tick or X symbols
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public static int getNumberOfTasks() {
