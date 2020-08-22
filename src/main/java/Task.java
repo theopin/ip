@@ -1,26 +1,30 @@
 public class Task {
-    private String description;
-    private boolean isDone = false;
-    private static int numberOfTasks = 0;
+    protected String description;
+    protected boolean isDone = false;
+    protected static int numberOfTasks = 0;
 
+    // Task Constructor
     public Task(String description) {
         this.description = description;
         numberOfTasks++;
     }
 
+    // Returns description of tasks
     public String getDescription() {
         return description;
     }
 
-    //return tick or X symbols
+    // Returns tick or X symbols based on the value of isDone
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    public void setIsDone(boolean isDone) {
+    // Sets the isDone variable of the task
+    public void markAsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
+    // Returns the number of Tasks created so far
     public static int getNumberOfTasks() {
         return numberOfTasks;
     }
