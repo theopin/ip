@@ -28,4 +28,9 @@ public class Task {
     public static int getNumberOfTasks() {
         return numberOfTasks;
     }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "]" + getDescription();
+    }
 }

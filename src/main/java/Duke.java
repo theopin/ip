@@ -61,7 +61,7 @@ public class Duke {
 
         default:
             // Default setting is to insert command as a new task
-            insertTask(userCommand);
+            insertTask(userCommand.substring(userAction.length()), userAction);
             break;
         }
 
@@ -69,7 +69,6 @@ public class Duke {
         printHorizontalLine();
         return false;
     }
-
     // Returns the action extracted from the user input
     public static String filterUserAction(String userCommand) {
         String newAction = userCommand.toLowerCase();
@@ -81,12 +80,15 @@ public class Duke {
 
         return newAction;
     }
+    // Prints the whole list of tasks
+    public static void printTaskList() {
+        System.out.println("\tHere are the tasks in your list:");
 
-    // Insert a new task into the list of tasks
-    public static void insertTask(String newTask) {
-        int new_index = Task.getNumberOfTasks();
-        tasks[new_index]= new Task(newTask);
-        System.out.println("\t" + "added: " + newTask);
+        // Print each task based on a specified format
+        int iterations = Task.getNumberOfTasks();
+        for (int i = 0; i < iterations; i++) {
+            System.out.println("\t" + tasks[i].toString());
+        }
     }
 
     // Returns the index of the task to be modified
@@ -103,22 +105,51 @@ public class Duke {
 
         // Task has been updated successfully
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t[" + (tasks[index].getStatusIcon() + "] ")
-                + tasks[index].getDescription());
+        System.out.println("\t" + tasks[index].toString());
     }
 
-    // Prints the whole list of tasks
-    public static void printTaskList() {
-        System.out.println("\tHere are the tasks in your list:");
+    // Insert a new task into the list of tasks
+    public static void insertTask(String newTask, String type) {
+        final String TODO = "todo";
+        final String EVENT = "event";
+        final String DEADLINE = "deadline";
 
-        // Print each task based on a specified format
-        int iterations = Task.getNumberOfTasks();
-        for (int i = 0; i < iterations; i++) {
-            System.out.println("\t" +(i+1) + ".[" + (tasks[i].getStatusIcon() + "] ")
-                    + tasks[i].getDescription());
+        int new_index = Task.getNumberOfTasks();
+        String taskName = newTask;
+
+        if(newTask.contains("/")) {
+            taskName = newTask.substring(0, newTask.indexOf("/") - 1).trim();
         }
+
+        switch(type) {
+        case TODO:
+            tasks[new_index] = new Todo(newTask);
+            break;
+        case EVENT:
+            String allocatedTime = splitTaskDetails(newTask);
+            tasks[new_index] = new Event(taskName, allocatedTime);
+            break;
+        case DEADLINE:
+            String dueDate = splitTaskDetails(newTask);
+            tasks[new_index] = new Deadline(taskName, dueDate);
+            break;
+        default:
+            tasks[new_index] = new Task(newTask);
+
+        }
+        System.out.println("\t" + "Got it. I've added this task: ");
+        System.out.println("\t\t" + tasks[new_index].toString());
+        System.out.println("\tNow you have "+ (new_index + 1)  + " tasks in the list.");
     }
 
+    public static String splitTaskDetails(String newTask) {
+        String extraDetails = "undefined";
+
+        if(newTask.contains("/")) {
+            extraDetails = newTask.substring(newTask.indexOf("/") + 4);
+        }
+        return extraDetails;
+    }
     // Print exit greetings for the user leaving the program
     public static void printExitText() {
         System.out.println("\tBye. Hope to see you again soon!");
