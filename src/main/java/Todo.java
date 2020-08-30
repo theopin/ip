@@ -1,5 +1,6 @@
 public class Todo extends Task {
 
+    // Todo Constructor
     public Todo(String description) {
         super(description);
     }
