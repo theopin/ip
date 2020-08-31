@@ -23,8 +23,7 @@ public class UserSession {
 
     // Overall structure of a user session
     public void runProgramSequence() {
-        final String EXIT = "bye";
-        String action = null;
+        String action;
         printWelcomeText();
 
         // Ask for new user input until user types an exit command
