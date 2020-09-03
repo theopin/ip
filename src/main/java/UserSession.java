@@ -65,9 +65,13 @@ public class UserSession {
         case ACTION_DEADLINE:
             createNewTask(userInput, ACTION_DEADLINE);
             break;
+        case ACTION_EXIT:
+            return;
         default:
             break;
         }
+
+        Message.printHorizontalLine();
     }
 
     // Sets the particular task as done
