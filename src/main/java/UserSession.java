@@ -24,7 +24,7 @@ public class UserSession {
     // Overall structure of a user session
     public void runProgramSequence() {
         String action;
-        printWelcomeText();
+        Message.printWelcomeText();
 
         // Ask for new user input until user types an exit command
         do {
@@ -34,29 +34,13 @@ public class UserSession {
 
            action = userInput[0];
         } while(!action.equals(ACTION_EXIT));
-        printExitText();
-    }
-
-    // Prints the initial greetings when the user loads the program
-    public void printWelcomeText() {
-        // Print a horizontal line and duke logo
-        printHorizontalLine();
-        String logo = "\t ____        _        \n"
-                + "\t|  _ \\ _   _| | _____ \n"
-                + "\t| | | | | | | |/ / _ \\\n"
-                + "\t| |_| | |_| |   <  __/\n"
-                + "\t|____/ \\__,_|_|\\_\\___|\n";
-
-        // Print greetings and a horizontal line
-        System.out.println("\tHello from\n" + logo);
-        System.out.println("\tWhat can I do for you?");
-        printHorizontalLine();
+        Message.printExitText();
     }
 
     // Takes in input from the user
     public String[] receiveUserInput() {
         String userCommand = myScanner.nextLine().trim();
-        printHorizontalLine();
+        Message.printHorizontalLine();
         return userCommand.split(WHITESPACE);
     }
 
@@ -91,9 +75,7 @@ public class UserSession {
         int index = Integer.parseInt(taskNumber) - 1;
         tasks[index].markAsDone(true);
 
-        // Inform user of success operation
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + tasks[index].toString());
+        Message.printTaskDoneSuccess(tasks[index].toString());
     }
 
     // Prints the whole list of tasks
@@ -140,20 +122,7 @@ public class UserSession {
         }
 
         // Inform user of success operation
-        System.out.println("\t" + "Got it. I've added this task: ");
-        System.out.println("\t\t" + tasks[new_index].toString());
-        System.out.println("\tNow you have "+ (new_index + 1)  + " tasks in the list.");
-    }
-
-    // Prints a horizontal line
-    public void printHorizontalLine() {
-        String horizontalLine = "\t____________________________________________________________";
-        System.out.println(horizontalLine);
-    }
-
-    // Print exit greetings for the user leaving the program
-    public void printExitText() {
-        System.out.println("\tBye. Hope to see you again soon!");
-        printHorizontalLine();
+        Message.printTaskAddSuccess(
+                tasks[new_index].toString(), new_index);
     }
 }
