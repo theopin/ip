@@ -1,9 +1,9 @@
-package duke;
+package duke.task;
 
 public class Event extends Task {
     protected String allocatedTime;
 
-    // duke.Event Constructor
+    // duke.task.Event Constructor
     public Event(String description, String allocatedTime) {
         super(description);
         this.allocatedTime = allocatedTime;

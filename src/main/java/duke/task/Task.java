@@ -1,11 +1,11 @@
-package duke;
+package duke.task;
 
 public class Task {
     protected String description;
     protected boolean isDone = false;
     protected static int numberOfTasks = 0;
 
-    // duke.Task Constructor
+    // duke.task.Task Constructor
     public Task(String description) {
         this.description = description;
         numberOfTasks++;
