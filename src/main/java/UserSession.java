@@ -61,7 +61,11 @@ public class UserSession {
         // Run the respective methods based on the action
         switch(action) {
         case ACTION_DONE:
-            setTaskAsComplete(userInput[1]);
+            try {
+                setTaskAsComplete(userInput[1]);
+            } catch (RangeExceedException e) {
+                e.alertException();
+            }
             break;
         case ACTION_LIST:
             printTaskList();
@@ -85,8 +89,14 @@ public class UserSession {
     }
 
     // Sets the particular task as done
-    public static void setTaskAsComplete(String taskNumber) {
+    public static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
         int index = Integer.parseInt(taskNumber) - 1;
+        int maxTask = Task.getNumberOfTasks();
+
+        if(index >= maxTask) {
+            throw new RangeExceedException();
+        }
+
         tasks[index].markAsDone(true);
 
         Message.printTaskDoneSuccess(tasks[index].toString());
