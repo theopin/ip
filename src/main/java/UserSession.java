@@ -23,25 +23,35 @@ public class UserSession {
 
     // Overall structure of a user session
     public void runProgramSequence() {
-        String action;
+        String action = "";
         Message.printWelcomeText();
 
         // Ask for new user input until user types an exit command
         do {
-           String[] userInput = receiveUserInput();
-           userInput[0] = userInput[0].toLowerCase();
-           parseUserInput(userInput);
-
-           action = userInput[0];
+            try {
+                String[] userInput = receiveUserInput();
+                userInput[0] = userInput[0].toLowerCase();
+                parseUserInput(userInput);
+                action = userInput[0];
+            } catch (IllegalCommandException e) {
+                e.alertException();
+            }
+;
         } while(!action.equals(ACTION_EXIT));
         Message.printExitText();
     }
 
     // Takes in input from the user
-    public String[] receiveUserInput() {
+    public String[] receiveUserInput() throws IllegalCommandException {
         String userCommand = myScanner.nextLine().trim();
         Message.printHorizontalLine();
-        return userCommand.split(WHITESPACE);
+        String[] splitCommand = userCommand.split(WHITESPACE);
+
+        if(splitCommand.length <= 1) {
+            throw new IllegalCommandException();
+        }
+
+        return splitCommand;
     }
 
     // Deciphers the action to be done based on the input
