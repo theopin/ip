@@ -23,25 +23,35 @@ public class UserSession {
 
     // Overall structure of a user session
     public void runProgramSequence() {
-        String action;
+        String action = "";
         Message.printWelcomeText();
 
         // Ask for new user input until user types an exit command
         do {
-           String[] userInput = receiveUserInput();
-           userInput[0] = userInput[0].toLowerCase();
-           parseUserInput(userInput);
-
-           action = userInput[0];
+            try {
+                String[] userInput = receiveUserInput();
+                userInput[0] = userInput[0].toLowerCase();
+                parseUserInput(userInput);
+                action = userInput[0];
+            } catch (IllegalCommandException e) {
+                e.alertException();
+            }
+;
         } while(!action.equals(ACTION_EXIT));
         Message.printExitText();
     }
 
     // Takes in input from the user
-    public String[] receiveUserInput() {
+    public String[] receiveUserInput() throws IllegalCommandException {
         String userCommand = myScanner.nextLine().trim();
         Message.printHorizontalLine();
-        return userCommand.split(WHITESPACE);
+        String[] splitCommand = userCommand.split(WHITESPACE);
+
+        if(splitCommand.length <= 1 && !splitCommand[0].equals(ACTION_LIST)) {
+            throw new IllegalCommandException();
+        }
+
+        return splitCommand;
     }
 
     // Deciphers the action to be done based on the input
@@ -51,7 +61,11 @@ public class UserSession {
         // Run the respective methods based on the action
         switch(action) {
         case ACTION_DONE:
-            setTaskAsComplete(userInput[1]);
+            try {
+                setTaskAsComplete(userInput[1]);
+            } catch (RangeExceedException e) {
+                e.alertException();
+            }
             break;
         case ACTION_LIST:
             printTaskList();
@@ -75,10 +89,15 @@ public class UserSession {
     }
 
     // Sets the particular task as done
-    public static void setTaskAsComplete(String taskNumber) {
+    public static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
         int index = Integer.parseInt(taskNumber) - 1;
-        tasks[index].markAsDone(true);
+        int maxTask = Task.getNumberOfTasks();
 
+        if(index < 0 || index >= maxTask) {
+            throw new RangeExceedException();
+        }
+
+        tasks[index].markAsDone(true);
         Message.printTaskDoneSuccess(tasks[index].toString());
     }
 
