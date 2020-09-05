@@ -47,7 +47,7 @@ public class UserSession {
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);
 
-        if(splitCommand.length <= 1) {
+        if(splitCommand.length <= 1 && !splitCommand[0].equals(ACTION_LIST)) {
             throw new IllegalCommandException();
         }
 
