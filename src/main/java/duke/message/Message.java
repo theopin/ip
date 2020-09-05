@@ -1,4 +1,4 @@
-package duke;
+package duke.message;
 
 public class Message {
     // Prints the initial greetings when the user loads the program
