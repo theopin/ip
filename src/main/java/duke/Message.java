@@ -1,3 +1,5 @@
+package duke;
+
 public class Message {
     // Prints the initial greetings when the user loads the program
     public static void printWelcomeText() {

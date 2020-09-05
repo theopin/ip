@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class UserSession {
@@ -13,7 +15,7 @@ public class UserSession {
     private static final String ACTION_EXIT = "bye";
     private static final String WHITESPACE = " ";
 
-    // Task array
+    // duke.Task array
     public static final int MAX_TASKS = 100;
     public static Task[] tasks = new Task[MAX_TASKS];
 
