@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.IllegalCommandException;
+import duke.exception.RangeExceedException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

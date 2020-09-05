@@ -1,4 +1,6 @@
-package duke;
+package duke.exception;
+
+import duke.Message;
 
 public class IllegalCommandException extends DukeException {
 
