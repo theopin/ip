@@ -93,12 +93,11 @@ public class UserSession {
         int index = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
 
-        if(index >= maxTask) {
+        if(index < 0 || index >= maxTask) {
             throw new RangeExceedException();
         }
 
         tasks[index].markAsDone(true);
-
         Message.printTaskDoneSuccess(tasks[index].toString());
     }
 
