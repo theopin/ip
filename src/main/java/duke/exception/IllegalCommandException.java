@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.message.Message;
+
 public class IllegalCommandException extends DukeException {
 
     @Override
