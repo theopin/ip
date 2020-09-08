@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.IllegalCommandException;
+import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
 import duke.message.Message;
 import duke.task.Deadline;
@@ -8,6 +9,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class UserSession {
@@ -22,6 +24,7 @@ public class UserSession {
     private static final String ACTION_DEADLINE = "deadline";
     private static final String ACTION_EXIT = "bye";
     private static final String WHITESPACE = " ";
+    private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
 
     // duke.task.Task array
     public static final int MAX_TASKS = 100;
@@ -45,6 +48,8 @@ public class UserSession {
                 action = userInput[0];
             } catch (IllegalCommandException e) {
                 e.alertException();
+            } catch (PartialCommandException p) {
+                p.alertException();
             }
 ;
         } while(!action.equals(ACTION_EXIT));
@@ -52,15 +57,19 @@ public class UserSession {
     }
 
     // Takes in input from the user
-    public String[] receiveUserInput() throws IllegalCommandException {
+    public String[] receiveUserInput() throws IllegalCommandException, PartialCommandException {
         String userCommand = myScanner.nextLine().trim();
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);
 
         if(splitCommand.length <= 1 && !splitCommand[0].equals(ACTION_LIST)) {
-            throw new IllegalCommandException();
+            if (Arrays.asList(taskTypes).contains(splitCommand[0])) {
+                throw new PartialCommandException(splitCommand[0]);
+            }
+            else {
+                throw new IllegalCommandException();
+            }
         }
-
         return splitCommand;
     }
 
