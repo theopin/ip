@@ -11,6 +11,7 @@ import duke.task.Todo;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class UserSession {
     // Scanner for user input
@@ -26,9 +27,7 @@ public class UserSession {
     private static final String WHITESPACE = " ";
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
 
-    // duke.task.Task array
-    public static final int MAX_TASKS = 100;
-    public static Task[] tasks = new Task[MAX_TASKS];
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public UserSession() {
         runProgramSequence();
@@ -51,7 +50,7 @@ public class UserSession {
             } catch (PartialCommandException p) {
                 p.alertException();
             }
-;
+
         } while(!action.equals(ACTION_EXIT));
         Message.printExitText();
     }
@@ -116,8 +115,8 @@ public class UserSession {
             throw new RangeExceedException();
         }
 
-        tasks[index].markAsDone(true);
-        Message.printTaskDoneSuccess(tasks[index].toString());
+        tasks.get(index).markAsDone(true);
+        Message.printTaskDoneSuccess(tasks.get(index).toString());
     }
 
     // Prints the whole list of tasks
@@ -125,9 +124,8 @@ public class UserSession {
         System.out.println("\tHere are the tasks in your list:");
 
         // Print each task based on a specified format
-        int iterations = Task.getNumberOfTasks();
-        for (int i = 0; i < iterations; i++) {
-            System.out.println("\t" + tasks[i].toString());
+        for (Task task: tasks) {
+            System.out.println("\t" + task.toString());
         }
     }
 
@@ -151,13 +149,13 @@ public class UserSession {
         // Creates a new task type based on the type specified
         switch (action) {
         case ACTION_TODO:
-            tasks[new_index] = new Todo(newTask.toString());
+            tasks.add(new Todo(newTask.toString()));
             break;
         case ACTION_EVENT:
-            tasks[new_index] = new Event(newTask.toString(), newTaskTimeline.toString());
+            tasks.add(new Event(newTask.toString(), newTaskTimeline.toString()));
             break;
         case ACTION_DEADLINE:
-            tasks[new_index] = new Deadline(newTask.toString(), newTaskTimeline.toString());
+            tasks.add(new Deadline(newTask.toString(), newTaskTimeline.toString()));
             break;
         default:
             break;
@@ -165,6 +163,6 @@ public class UserSession {
 
         // Inform user of success operation
         Message.printTaskAddSuccess(
-                tasks[new_index].toString(), new_index);
+                tasks.get(new_index).toString(), new_index);
     }
 }
