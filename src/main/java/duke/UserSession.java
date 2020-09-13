@@ -27,6 +27,7 @@ public class UserSession {
     private static final String ACTION_EXIT = "bye";
     private static final String WHITESPACE = " ";
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
+    private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
     public static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -63,7 +64,7 @@ public class UserSession {
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);
 
-        if(splitCommand.length <= 1 && !splitCommand[0].equals(ACTION_LIST)) {
+        if(splitCommand.length <= 1 && !(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
             if (Arrays.asList(taskTypes).contains(splitCommand[0])) {
                 throw new PartialCommandException(splitCommand[0]);
             }
@@ -134,6 +135,7 @@ public class UserSession {
     // Creates a new task based on its type
     public static void createNewTask(String[] inputSegments, String action) {
         int new_index = Task.getNumberOfTasks();
+        boolean isSavedTask = false;
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
         StringBuilder newTaskTimeline = new StringBuilder();
@@ -141,6 +143,8 @@ public class UserSession {
         for (String inputSegment : inputSegments) {
             if(inputSegment.contains("/")) {
                 hasReachedSplit = true;
+            } else if(inputSegment.equals("S")){
+                isSavedTask = true;
             } else if(!hasReachedSplit && !inputSegment.equals(action)) {
                 newTask.append(WHITESPACE).append(inputSegment);
             } else if(hasReachedSplit)  {
@@ -164,7 +168,9 @@ public class UserSession {
         }
 
         // Inform user of success operation
-        Message.printTaskAddSuccess(
-                tasks.get(new_index).toString(), new_index);
+        if(!isSavedTask) {
+            Message.printTaskAddSuccess(
+                    tasks.get(new_index).toString(), new_index);
+        }
     }
 }
