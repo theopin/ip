@@ -11,7 +11,7 @@ import static duke.UserSession.tasks;
 
 public class ReadDataFile extends DataFile {
 
-    public ReadDataFile(){
+    public ReadDataFile() {
         executeFunction();
     }
 
@@ -20,11 +20,11 @@ public class ReadDataFile extends DataFile {
         try {
             implementFileContents();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("\tFile not found");
         }
     }
 
-    private void implementFileContents() throws FileNotFoundException {
+    public void implementFileContents() throws FileNotFoundException {
         File userFile = new File(filePath); // create a File for the given file path
         Scanner dataScanner = new Scanner(userFile);
         int taskIndex = 0;
@@ -34,7 +34,7 @@ public class ReadDataFile extends DataFile {
         }
     }
 
-    private void convertStringToTask(String newTask, int taskIndex) {
+    public void convertStringToTask(String newTask, int taskIndex) {
         String[] formattedTask = newTask.split(" \\| ");
 
         boolean isTaskDone = formattedTask[2].equals("1");

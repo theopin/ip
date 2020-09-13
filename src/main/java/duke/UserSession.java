@@ -1,6 +1,7 @@
 package duke;
 
 import duke.data.ReadDataFile;
+import duke.data.WriteDataFile;
 import duke.exception.IllegalCommandException;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
@@ -120,6 +121,7 @@ public class UserSession {
 
         tasks.get(index).markAsDone(true);
         Message.printTaskDoneSuccess(tasks.get(index).toString());
+        new WriteDataFile();
     }
 
     // Prints the whole list of tasks
@@ -171,6 +173,7 @@ public class UserSession {
         if(!isSavedTask) {
             Message.printTaskAddSuccess(
                     tasks.get(new_index).toString(), new_index);
+            new WriteDataFile();
         }
     }
 }

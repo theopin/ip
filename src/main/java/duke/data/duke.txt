@@ -1,3 +1,4 @@
 T | print paper | 0 | S
 E | eat pizza | 1 | 4pm | S
 D | retrieve parts | 1 | 6pm | S
+T | eat salad | 1 | S

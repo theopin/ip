@@ -9,6 +9,10 @@ public class Event extends Task {
         this.allocatedTime = allocatedTime;
     }
 
+    public String getAllocatedTime() {
+        return allocatedTime;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at:" + allocatedTime + ")";
