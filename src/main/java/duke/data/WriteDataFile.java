@@ -40,9 +40,6 @@ public class WriteDataFile extends DataFile {
             }
 
             textBuild.append(" | ");
-            textBuild.append(task.getDescription());
-
-            textBuild.append(" | ");
             if(task.getStatusIcon().equals("\u2713")) {
                 textBuild.append(1);
             } else {
@@ -50,15 +47,16 @@ public class WriteDataFile extends DataFile {
             }
 
             textBuild.append(" | ");
+            textBuild.append(task.getDescription());
+
             if(task.getClass() == Event.class) {
+                textBuild.append(" | ");
                 textBuild.append(((Event)task).getAllocatedTime());
-                textBuild.append(" | ");
             } else if(task.getClass() == Deadline.class) {
-                textBuild.append(((Deadline)task).getDueDate());
                 textBuild.append(" | ");
+                textBuild.append(((Deadline)task).getDueDate());
             }
 
-            textBuild.append("S");
             textBuild.append(System.lineSeparator());
         }
         this.textContent = textBuild.toString();
