@@ -4,19 +4,25 @@ import java.io.IOException;
 import java.io.FileWriter;
 
 public class WriteDataFile extends DataFile {
+    protected String textContent;
+
+    public WriteDataFile(String textContent) {
+        super();
+        this.textContent = textContent;
+    }
 
     @Override
     public void executeFunction() {
         try {
-            writeToFile("first line" + System.lineSeparator() + "second line");
+            writeToFile();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
-    private static void writeToFile(String textToAdd) throws IOException {
+    private void writeToFile() throws IOException {
         FileWriter fileEditor = new FileWriter(filePath);
-        fileEditor.write(textToAdd);
+        fileEditor.write(textContent);
         fileEditor.close();
     }
 

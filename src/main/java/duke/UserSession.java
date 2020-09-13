@@ -1,5 +1,6 @@
 package duke;
 
+import duke.data.ReadDataFile;
 import duke.exception.IllegalCommandException;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
@@ -30,6 +31,7 @@ public class UserSession {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public UserSession() {
+        new ReadDataFile();
         runProgramSequence();
     }
 
