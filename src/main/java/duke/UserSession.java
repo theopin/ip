@@ -20,13 +20,14 @@ public class UserSession {
     private static final Scanner myScanner = new Scanner(System.in);
 
     // String Constants
-    private static final String ACTION_LIST = "list";
-    private static final String ACTION_DONE = "done";
-    private static final String ACTION_TODO = "todo";
-    private static final String ACTION_EVENT = "event";
-    private static final String ACTION_DEADLINE = "deadline";
-    private static final String ACTION_EXIT = "bye";
-    private static final String WHITESPACE = " ";
+    public static final String ACTION_LIST = "list";
+    public static final String ACTION_DONE = "done";
+    public static final String ACTION_TODO = "todo";
+    public static final String ACTION_EVENT = "event";
+    public static final String ACTION_DEADLINE = "deadline";
+    public static final String ACTION_EXIT = "bye";
+    public static final String WHITESPACE = " ";
+
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
     private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
@@ -137,7 +138,6 @@ public class UserSession {
     // Creates a new task based on its type
     public static void createNewTask(String[] inputSegments, String action) {
         int new_index = Task.getNumberOfTasks();
-        boolean isSavedTask = false;
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
         StringBuilder newTaskTimeline = new StringBuilder();
@@ -145,8 +145,6 @@ public class UserSession {
         for (String inputSegment : inputSegments) {
             if(inputSegment.contains("/")) {
                 hasReachedSplit = true;
-            } else if(inputSegment.equals("S")){
-                isSavedTask = true;
             } else if(!hasReachedSplit && !inputSegment.equals(action)) {
                 newTask.append(WHITESPACE).append(inputSegment);
             } else if(hasReachedSplit)  {
@@ -155,25 +153,28 @@ public class UserSession {
         }
 
         // Creates a new task type based on the type specified
+        insertNewTask(action, newTask.toString(), newTaskTimeline.toString());
+
+        // Inform user of success operation
+        Message.printTaskAddSuccess(
+                tasks.get(new_index).toString(), new_index);
+        new WriteDataFile();
+
+    }
+
+    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
         switch (action) {
         case ACTION_TODO:
-            tasks.add(new Todo(newTask.toString()));
+            tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask.toString(), newTaskTimeline.toString()));
+            tasks.add(new Event(newTask, newTaskTimeline));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask.toString(), newTaskTimeline.toString()));
+            tasks.add(new Deadline(newTask, newTaskTimeline));
             break;
         default:
             break;
-        }
-
-        // Inform user of success operation
-        if(!isSavedTask) {
-            Message.printTaskAddSuccess(
-                    tasks.get(new_index).toString(), new_index);
-            new WriteDataFile();
         }
     }
 }

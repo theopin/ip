@@ -37,29 +37,35 @@ public class ReadDataFile extends DataFile {
     public void convertStringToTask(String newTask, int taskIndex) {
         String[] formattedTask = newTask.split(" \\| ");
 
-        boolean isTaskDone = formattedTask[2].equals("1");
+        String action = "";
+        String newTaskDescription = formattedTask[2];
+        String newTaskTimeline = "";
 
+        boolean isTaskDone = formattedTask[1].equals("1");
 
-        switch(formattedTask[0]){
+        if(!formattedTask[0].equals("T")) {
+            newTaskTimeline = formattedTask[3];
+        }
+        switch(formattedTask[0]) {
         case "T":
-            formattedTask[0] = "todo";
+            action = UserSession.ACTION_TODO;
             formattedTask[2] = "";
             break;
         case "D":
-            formattedTask[0] = "deadline";
-            formattedTask[2] = "/by";
+            action = UserSession.ACTION_DEADLINE;
             break;
         case "E":
-            formattedTask[0] = "event";
-            formattedTask[2] = "/at";
+            action = UserSession.ACTION_EVENT;
             break;
+        default:
+            return;
         }
-        String action = formattedTask[0];
-        UserSession.createNewTask(formattedTask, action);
 
-        if(isTaskDone) {
-            tasks.get(taskIndex).markAsDone(true);
-        }
+        UserSession.insertNewTask(action, newTaskDescription, newTaskTimeline);
+
+        //if(isTaskDone) {
+        //    tasks.get(taskIndex).markAsDone(true);
+      // }
 
     }
 }
