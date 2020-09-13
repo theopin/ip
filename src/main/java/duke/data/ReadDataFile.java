@@ -20,7 +20,8 @@ public class ReadDataFile extends DataFile {
         try {
             implementFileContents();
         } catch (FileNotFoundException e) {
-            System.out.println("\tFile not found");
+            System.out.println("\tFile not found! Creating new file!");
+            new WriteDataFile();
         }
     }
 
@@ -63,9 +64,9 @@ public class ReadDataFile extends DataFile {
 
         UserSession.insertNewTask(action, newTaskDescription, newTaskTimeline);
 
-        //if(isTaskDone) {
-        //    tasks.get(taskIndex).markAsDone(true);
-      // }
+        if(isTaskDone) {
+            tasks.get(taskIndex).markAsDone(true);
+        }
 
     }
 }
