@@ -1,5 +1,7 @@
 package duke;
 
+import duke.data.ReadDataFile;
+import duke.data.WriteDataFile;
 import duke.exception.IllegalCommandException;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
@@ -18,20 +20,22 @@ public class UserSession {
     private static final Scanner myScanner = new Scanner(System.in);
 
     // String Constants
-    private static final String ACTION_LIST = "list";
-    private static final String ACTION_DONE = "done";
-    private static final String ACTION_REMOVE = "remove";
 
-    private static final String ACTION_TODO = "todo";
-    private static final String ACTION_EVENT = "event";
-    private static final String ACTION_DEADLINE = "deadline";
-    private static final String ACTION_EXIT = "bye";
-    private static final String WHITESPACE = " ";
+    public static final String ACTION_LIST = "list";
+    public static final String ACTION_DONE = "done";
+    public static final String ACTION_TODO = "todo";
+    public static final String ACTION_EVENT = "event";
+    public static final String ACTION_DEADLINE = "deadline";
+    public static final String ACTION_EXIT = "bye";
+    public static final String WHITESPACE = " ";
+
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
+    private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     public UserSession() {
+        new ReadDataFile();
         runProgramSequence();
     }
 
@@ -63,7 +67,7 @@ public class UserSession {
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);
 
-        if(splitCommand.length <= 1 && !splitCommand[0].equals(ACTION_LIST)) {
+        if(splitCommand.length <= 1 && !(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
             if (Arrays.asList(taskTypes).contains(splitCommand[0])) {
                 throw new PartialCommandException(splitCommand[0]);
             }
@@ -143,6 +147,7 @@ public class UserSession {
 
         tasks.get(index).markAsDone(true);
         Message.printTaskDoneSuccess(tasks.get(index).toString());
+        new WriteDataFile();
     }
 
     // Prints the whole list of tasks
@@ -173,15 +178,25 @@ public class UserSession {
         }
 
         // Creates a new task type based on the type specified
+        insertNewTask(action, newTask.toString(), newTaskTimeline.toString());
+
+        // Inform user of success operation
+        Message.printTaskAddSuccess(
+                tasks.get(new_index).toString(), new_index);
+        new WriteDataFile();
+
+    }
+
+    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
         switch (action) {
         case ACTION_TODO:
-            tasks.add(new Todo(newTask.toString()));
+            tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask.toString(), newTaskTimeline.toString()));
+            tasks.add(new Event(newTask, newTaskTimeline));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask.toString(), newTaskTimeline.toString()));
+            tasks.add(new Deadline(newTask, newTaskTimeline));
             break;
         default:
             break;
@@ -190,5 +205,6 @@ public class UserSession {
         // Inform user of success operation
         Message.modifyTaskSuccess(
                 tasks.get(newIndex).toString(), true);
+
     }
 }
