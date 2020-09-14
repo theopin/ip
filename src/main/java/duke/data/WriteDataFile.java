@@ -62,7 +62,7 @@ public class WriteDataFile extends DataFile {
     }
 
     public void writeToFile() throws IOException {
-        FileWriter fileEditor = new FileWriter(filePath);
+        FileWriter fileEditor = new FileWriter(String.valueOf(TXT_FILE_DIR));
         fileEditor.write(textContent);
         fileEditor.close();
     }

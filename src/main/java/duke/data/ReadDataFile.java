@@ -4,10 +4,11 @@ import duke.UserSession;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 import static duke.UserSession.tasks;
-
 
 public class ReadDataFile extends DataFile {
 
@@ -20,13 +21,21 @@ public class ReadDataFile extends DataFile {
         try {
             implementFileContents();
         } catch (FileNotFoundException e) {
-            System.out.println("\tFile not found! Creating new file!");
-            new WriteDataFile();
+            handleMissingFile();
+        }
+    }
+
+    public void handleMissingFile() {
+        System.out.println("\tFile not found! Creating new file!");
+        try {
+            createNewFile();
+        } catch (IOException i) {
+            System.out.println("\tFile cannot be created! Data will not be stored!");
         }
     }
 
     public void implementFileContents() throws FileNotFoundException {
-        File userFile = new File(filePath); // create a File for the given file path
+        File userFile = new File(String.valueOf(TXT_FILE_DIR)); // create a File for the given file path
         Scanner dataScanner = new Scanner(userFile);
         int taskIndex = 0;
         while (dataScanner.hasNextLine()) {
@@ -68,5 +77,14 @@ public class ReadDataFile extends DataFile {
             tasks.get(taskIndex).markAsDone(true);
         }
 
+    }
+
+    private void createNewFile() throws IOException {
+        if(!Files.exists(DATA_DIR)) {
+            Files.createDirectories(DATA_DIR);
+        }
+        if(!Files.exists(TXT_FILE_DIR)) {
+            Files.createFile(TXT_FILE_DIR);
+        }
     }
 }
