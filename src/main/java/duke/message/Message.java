@@ -1,5 +1,7 @@
 package duke.message;
 
+import duke.task.Task;
+
 public class Message {
     // Prints the initial greetings when the user loads the program
     public static void printWelcomeText() {
@@ -37,10 +39,21 @@ public class Message {
     }
 
     // Inform user of success in adding task to list
-    public static void printTaskAddSuccess(
-            String taskName, int taskIndex) {
-        System.out.println("\t" + "Got it. I've added this task: ");
+    public static void modifyTaskSuccess(
+            String taskName, boolean isAddTask) {
+        String action;
+
+        if(isAddTask) {
+            action = "added";
+        } else {
+            action = "removed";
+        }
+
+        int maxTask = Task.getNumberOfTasks();
+
+        System.out.println("\t" + "Got it. I've " + action + " this task: ");
         System.out.println("\t\t" + taskName);
-        System.out.println("\tNow you have "+ (taskIndex + 1)  + " tasks in the list.");
+        System.out.println("\tNow you have "+ maxTask  + " tasks in the list.");
     }
+
 }

@@ -31,6 +31,10 @@ public class Task {
         return numberOfTasks;
     }
 
+    public static void taskRemoved() {
+        numberOfTasks--;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "]" + getDescription();

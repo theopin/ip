@@ -20,6 +20,8 @@ public class UserSession {
     // String Constants
     private static final String ACTION_LIST = "list";
     private static final String ACTION_DONE = "done";
+    private static final String ACTION_REMOVE = "remove";
+
     private static final String ACTION_TODO = "todo";
     private static final String ACTION_EVENT = "event";
     private static final String ACTION_DEADLINE = "deadline";
@@ -85,6 +87,13 @@ public class UserSession {
                 e.alertException();
             }
             break;
+        case ACTION_REMOVE:
+            try {
+                removeTask(userInput[1]);
+            } catch (RangeExceedException e) {
+                e.alertException();
+            }
+            break;
         case ACTION_LIST:
             printTaskList();
             break;
@@ -104,6 +113,23 @@ public class UserSession {
         }
 
         Message.printHorizontalLine();
+    }
+
+    private void removeTask(String taskNumber) throws RangeExceedException {
+        int oldIndex = Integer.parseInt(taskNumber) - 1;
+        int maxTask = Task.getNumberOfTasks();
+
+        if(oldIndex < 0 || oldIndex >= maxTask) {
+            throw new RangeExceedException();
+        }
+
+        String deletedTask = tasks.get(oldIndex).toString();
+
+        tasks.remove(oldIndex);
+        Task.taskRemoved();
+
+        Message.modifyTaskSuccess(
+                deletedTask, false);
     }
 
     // Sets the particular task as done
@@ -131,7 +157,7 @@ public class UserSession {
 
     // Creates a new task based on its type
     public static void createNewTask(String[] inputSegments, String action) {
-        int new_index = Task.getNumberOfTasks();
+        int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
         StringBuilder newTaskTimeline = new StringBuilder();
@@ -162,7 +188,7 @@ public class UserSession {
         }
 
         // Inform user of success operation
-        Message.printTaskAddSuccess(
-                tasks.get(new_index).toString(), new_index);
+        Message.modifyTaskSuccess(
+                tasks.get(newIndex).toString(), true);
     }
 }
