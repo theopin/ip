@@ -22,7 +22,7 @@ public class WriteDataFile extends DataFile {
             setTextContent();
             writeToFile();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            System.out.println("\tSomething went wrong: " + e.getMessage());
         }
     }
 
