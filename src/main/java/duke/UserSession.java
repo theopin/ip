@@ -136,6 +136,8 @@ public class UserSession {
 
         Message.modifyTaskSuccess(
                 deletedTask, false);
+        new WriteDataFile();
+
     }
 
     // Sets the particular task as done
