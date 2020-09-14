@@ -2,6 +2,7 @@ package duke;
 
 import duke.data.ReadDataFile;
 import duke.data.WriteDataFile;
+
 import duke.exception.IllegalCommandException;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
@@ -27,6 +28,7 @@ public class UserSession {
     public static final String ACTION_EVENT = "event";
     public static final String ACTION_DEADLINE = "deadline";
     public static final String ACTION_EXIT = "bye";
+    public static final String ACTION_REMOVE = "remove";
     public static final String WHITESPACE = " ";
 
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
@@ -181,8 +183,8 @@ public class UserSession {
         insertNewTask(action, newTask.toString(), newTaskTimeline.toString());
 
         // Inform user of success operation
-        Message.printTaskAddSuccess(
-                tasks.get(new_index).toString(), new_index);
+        Message.modifyTaskSuccess(
+                tasks.get(newIndex).toString(), true);
         new WriteDataFile();
 
     }
@@ -201,10 +203,6 @@ public class UserSession {
         default:
             break;
         }
-
-        // Inform user of success operation
-        Message.modifyTaskSuccess(
-                tasks.get(newIndex).toString(), true);
 
     }
 }
