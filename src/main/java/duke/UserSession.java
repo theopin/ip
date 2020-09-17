@@ -182,7 +182,7 @@ public class UserSession {
         }
 
         // Creates a new task type based on the type specified
-        insertNewTask(action, newTask.toString(), newTaskTimeline.toString());
+        insertNewTask(action, newTask.toString().trim(), newTaskTimeline.toString().trim());
 
         // Inform user of success operation
         Message.modifyTaskSuccess(

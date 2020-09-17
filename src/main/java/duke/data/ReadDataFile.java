@@ -53,13 +53,27 @@ public class ReadDataFile extends DataFile {
 
         boolean isTaskDone = formattedTask[1].equals("1");
 
+        // Task is a deadline or event
         if(!formattedTask[0].equals("T")) {
             newTaskTimeline = formattedTask[3];
         }
-        switch(formattedTask[0]) {
+        action = getAction(formattedTask[0]);
+        if (action == null) {
+            return;
+        }
+
+        UserSession.insertNewTask(action, newTaskDescription, newTaskTimeline);
+        if(isTaskDone) {
+            tasks.get(taskIndex).markAsDone(true);
+        }
+
+    }
+
+    public String getAction(String dataInput) {
+        String action;
+        switch(dataInput) {
         case "T":
             action = UserSession.ACTION_TODO;
-            formattedTask[2] = "";
             break;
         case "D":
             action = UserSession.ACTION_DEADLINE;
@@ -68,18 +82,12 @@ public class ReadDataFile extends DataFile {
             action = UserSession.ACTION_EVENT;
             break;
         default:
-            return;
+            return null;
         }
-
-        UserSession.insertNewTask(action, newTaskDescription, newTaskTimeline);
-
-        if(isTaskDone) {
-            tasks.get(taskIndex).markAsDone(true);
-        }
-
+        return action;
     }
 
-    private void createNewFile() throws IOException {
+    public void createNewFile() throws IOException {
         if(!Files.exists(DATA_DIR)) {
             Files.createDirectories(DATA_DIR);
         }

@@ -37,6 +37,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }
