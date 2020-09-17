@@ -74,7 +74,7 @@ public class UserSession {
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);
 
-        if(splitCommand.length <= 1 && !(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
+        if(!(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
             if (Arrays.asList(taskTypes).contains(splitCommand[0])) {
                 throw new PartialCommandException(splitCommand[0]);
             }
