@@ -49,10 +49,7 @@ public class UserSession {
         // Ask for new user input until user types an exit command
         do {
             try {
-                String[] userInput = receiveUserInput();
-                userInput[0] = userInput[0].toLowerCase();
-                parseUserInput(userInput);
-                action = userInput[0];
+                action = requestUserInput();
             } catch (IllegalCommandException e) {
                 e.alertException();
             } catch (PartialCommandException p) {
@@ -61,6 +58,14 @@ public class UserSession {
 
         } while(!action.equals(ACTION_EXIT));
         Message.printExitText();
+    }
+
+    public String requestUserInput() throws IllegalCommandException, PartialCommandException {
+        String[] userInput = receiveUserInput();
+        userInput[0] = userInput[0].toLowerCase();
+        parseUserInput(userInput);
+
+        return userInput[0];
     }
 
     // Takes in input from the user
@@ -130,7 +135,6 @@ public class UserSession {
         }
 
         String deletedTask = tasks.get(oldIndex).toString();
-
         tasks.remove(oldIndex);
         Task.taskRemoved();
 
