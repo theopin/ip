@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class TaskHandler {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
+    // String Constants
     public static final String ACTION_LIST = "list";
-    public static final String ACTION_DONE = "done";
     public static final String ACTION_TODO = "todo";
     public static final String ACTION_EVENT = "event";
+    public static final String ACTION_DONE = "done";
     public static final String ACTION_DEADLINE = "deadline";
     public static final String ACTION_EXIT = "bye";
     public static final String ACTION_REMOVE = "remove";

@@ -9,6 +9,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import static duke.UserSession.*;
+import static duke.task.TaskHandler.*;
+import static duke.task.TaskHandler.ACTION_EXIT;
 
 public class CommandParser {
     // Scanner for user input
@@ -59,5 +61,3 @@ public class CommandParser {
         return actionCommand;
     }
 }
-
-
