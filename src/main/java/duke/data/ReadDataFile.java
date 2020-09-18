@@ -1,6 +1,6 @@
 package duke.data;
 
-import duke.UserSession;
+import duke.task.TaskHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-import static duke.UserSession.tasks;
+import static duke.task.TaskHandler.tasks;
 
 public class ReadDataFile extends DataFile {
 
@@ -62,7 +62,7 @@ public class ReadDataFile extends DataFile {
             return;
         }
 
-        UserSession.insertNewTask(action, newTaskDescription, newTaskTimeline);
+        TaskHandler.insertNewTask(action, newTaskDescription, newTaskTimeline);
         if(isTaskDone) {
             tasks.get(taskIndex).markAsDone(true);
         }
@@ -73,13 +73,13 @@ public class ReadDataFile extends DataFile {
         String action;
         switch(dataInput) {
         case "T":
-            action = UserSession.ACTION_TODO;
+            action = TaskHandler.ACTION_TODO;
             break;
         case "D":
-            action = UserSession.ACTION_DEADLINE;
+            action = TaskHandler.ACTION_DEADLINE;
             break;
         case "E":
-            action = UserSession.ACTION_EVENT;
+            action = TaskHandler.ACTION_EVENT;
             break;
         default:
             return null;

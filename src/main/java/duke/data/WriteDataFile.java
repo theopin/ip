@@ -5,7 +5,7 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 
-import static duke.UserSession.tasks;
+import static duke.task.TaskHandler.tasks;
 
 import java.io.IOException;
 import java.io.FileWriter;
