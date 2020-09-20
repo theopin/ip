@@ -55,7 +55,7 @@ public class ReadDataFile extends DataFile {
         boolean isTaskDone = formattedTask[1].equals("1");
 
         // Task is a deadline or event
-        if(!formattedTask[0].equals("T")) {
+        if(!newTask.equals("") && !formattedTask[0].equals("T")) {
             newTaskDate = formattedTask[3];
             newTaskTime = formattedTask[4];
         }

@@ -1,6 +1,5 @@
 package duke.task;
 
-import static duke.task.TaskHandler.WHITESPACE;
 
 public class Deadline extends Task {
     protected String dueDate;
@@ -25,15 +24,9 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder deadlineSummary = new StringBuilder();
         deadlineSummary.append("[D]").append(super.toString()).append(" (by: ");
-        if(!dueDate.equals("")) {
-            deadlineSummary.append(dueDate).append(WHITESPACE);
-        }
-        if(!dueTime.equals("")) {
-            deadlineSummary.append(dueTime);
-        }
-        deadlineSummary.append(")");
+        return getString(deadlineSummary, dueDate, dueTime);
 
-        return deadlineSummary.toString();
-        
     }
+
+
 }

@@ -1,5 +1,8 @@
 package duke.task;
 
+import static duke.task.TaskHandler.EMPTY;
+import static duke.task.TaskHandler.WHITESPACE;
+
 public class Task {
     protected String description;
     protected boolean isDone = false;
@@ -35,8 +38,24 @@ public class Task {
         numberOfTasks--;
     }
 
+    public static String modifyString(StringBuilder summary, String dueDate, String dueTime) {
+        if(!dueDate.equals(EMPTY)) {
+            summary.append(dueDate);
+            if(!dueTime.equals(EMPTY)) {
+                summary.append(WHITESPACE).append(dueTime);
+            }
+        } else if(!dueTime.equals(EMPTY)) {
+            summary.append(dueTime);
+        }
+        summary.append(")");
+
+        return summary.toString();
+    }
+    
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
+
+
 }
