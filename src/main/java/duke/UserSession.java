@@ -25,14 +25,8 @@ public class UserSession {
 
         // Ask for new user input until user types an exit command
         do {
-            try {
-                newUserCommand = new CommandParser();
-                action = newUserCommand.getActionCommand();
-            } catch (IllegalCommandException e) {
-                e.alertException();
-            } catch (PartialCommandException p) {
-                p.alertException();
-            }
+            newUserCommand = new CommandParser();
+            action = newUserCommand.getActionCommand();
 
         } while (!action.equals(ACTION_EXIT));
         Message.printExitText();

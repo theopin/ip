@@ -22,17 +22,24 @@ public class CommandParser {
     private static final String[] markTaskTypes = {ACTION_DONE, ACTION_REMOVE};
     private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
-    private String actionCommand;
+    private String actionCommand = "";
 
-    public CommandParser() throws IllegalCommandException, PartialCommandException {
+    public CommandParser() {
         requestUserInput();
     }
 
-    public void requestUserInput() throws IllegalCommandException, PartialCommandException {
-        String[] userInput = receiveUserInput();
-        userInput[0] = userInput[0].toLowerCase();
-        new TaskHandler(userInput);
-        setActionCommand(userInput[0]);
+    public void requestUserInput()  {
+        String[] userInput;
+        try {
+            userInput = receiveUserInput();
+            userInput[0] = userInput[0].toLowerCase();
+            new TaskHandler(userInput);
+            setActionCommand(userInput[0]);
+        } catch (IllegalCommandException e) {
+            e.alertException();
+        } catch (PartialCommandException p) {
+            p.alertException();
+        }
     }
 
     // Takes in input from the user
