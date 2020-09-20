@@ -3,6 +3,7 @@ package duke.task;
 import duke.data.WriteDataFile;
 import duke.exception.RangeExceedException;
 import duke.message.Message;
+import duke.parser.DateTimeParser;
 
 import java.util.ArrayList;
 
@@ -134,6 +135,17 @@ public class TaskHandler {
     }
 
     public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
+        String taskDate = "";
+        String taskTime = "";
+
+        if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
+            taskDate = DateTimeParser.parseDate("22 01 1998");
+            taskTime = DateTimeParser.parseTime("18:00");
+
+            System.out.println(taskDate);
+            System.out.println(taskTime);
+        }
+
         switch (action) {
         case ACTION_TODO:
             tasks.add(new Todo(newTask));
