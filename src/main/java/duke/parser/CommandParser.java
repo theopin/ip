@@ -8,9 +8,9 @@ import duke.task.TaskHandler;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static duke.UserSession.*;
+
 import static duke.task.TaskHandler.*;
-import static duke.task.TaskHandler.ACTION_EXIT;
+
 
 public class CommandParser {
     // Scanner for user input
@@ -19,16 +19,14 @@ public class CommandParser {
     public static final String WHITESPACE = " ";
 
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
+    private static final String[] markTaskTypes = {ACTION_DONE, ACTION_REMOVE};
     private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
     private String actionCommand;
-    //public static ArrayList<Task> tasks = new ArrayList<>();
 
     public CommandParser() throws IllegalCommandException, PartialCommandException {
         requestUserInput();
     }
-
-
 
     public void requestUserInput() throws IllegalCommandException, PartialCommandException {
         String[] userInput = receiveUserInput();
@@ -44,10 +42,14 @@ public class CommandParser {
         String[] splitCommand = userCommand.split(WHITESPACE);
 
         if (!(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
-            if (Arrays.asList(taskTypes).contains(splitCommand[0])) {
-                throw new PartialCommandException(splitCommand[0]);
-            } else {
+            if (!Arrays.asList(taskTypes).contains(splitCommand[0])
+                && !Arrays.asList(markTaskTypes).contains(splitCommand[0])) {
+                System.out.println("\tHere are the tasks in your list:");
                 throw new IllegalCommandException();
+            }
+
+            if(splitCommand.length <= 1) {
+                throw new PartialCommandException(splitCommand[0]);
             }
         }
         return splitCommand;
