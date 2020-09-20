@@ -44,7 +44,6 @@ public class CommandParser {
         if (!(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
             if (!Arrays.asList(taskTypes).contains(splitCommand[0])
                 && !Arrays.asList(markTaskTypes).contains(splitCommand[0])) {
-                System.out.println("\tHere are the tasks in your list:");
                 throw new IllegalCommandException();
             }
 

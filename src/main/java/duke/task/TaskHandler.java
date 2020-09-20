@@ -84,15 +84,15 @@ public class TaskHandler {
 
     // Sets the particular task as done
     public static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
-        int index = Integer.parseInt(taskNumber) - 1;
+        int taskIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
 
-        if(index < 0 || index >= maxTask) {
+        if(taskIndex < 0 || taskIndex >= maxTask) {
             throw new RangeExceedException();
         }
 
-        tasks.get(index).markAsDone(true);
-        Message.printTaskDoneSuccess(tasks.get(index).toString());
+        tasks.get(taskIndex).markAsDone(true);
+        Message.printTaskDoneSuccess(tasks.get(taskIndex).toString());
         new WriteDataFile();
     }
 
