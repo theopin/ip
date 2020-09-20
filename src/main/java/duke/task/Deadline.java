@@ -24,7 +24,7 @@ public class Deadline extends Task {
     public String toString() {
         StringBuilder deadlineSummary = new StringBuilder();
         deadlineSummary.append("[D]").append(super.toString()).append(" (by: ");
-        return getString(deadlineSummary, dueDate, dueTime);
+        return modifyString(deadlineSummary, dueDate, dueTime);
 
     }
 

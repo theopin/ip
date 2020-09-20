@@ -27,6 +27,6 @@ public class Event extends Task {
     public String toString() {
         StringBuilder eventSummary = new StringBuilder();
         eventSummary.append("[E]").append(super.toString()).append(" (by: ");
-        return getString(eventSummary, allocatedDate, allocatedTime);
+        return modifyString(eventSummary, allocatedDate, allocatedTime);
     }
 }

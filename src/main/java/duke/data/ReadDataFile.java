@@ -1,5 +1,6 @@
 package duke.data;
 
+import duke.exception.PartialCommandException;
 import duke.task.TaskHandler;
 
 import java.io.File;
@@ -64,7 +65,11 @@ public class ReadDataFile extends DataFile {
             return;
         }
 
-        TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime);
+        try {
+            TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime);
+        } catch (PartialCommandException e) {
+            e.alertException();
+        }
         if(isTaskDone) {
             tasks.get(taskIndex).markAsDone(true);
         }

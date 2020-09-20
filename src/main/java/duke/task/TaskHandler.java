@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.data.WriteDataFile;
+import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
 import duke.message.Message;
 import duke.parser.DateTimeParser;
@@ -131,7 +132,11 @@ public class TaskHandler {
         }
 
         // Creates a new task type based on the type specified
-        insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+        try {
+            insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+        } catch (PartialCommandException e) {
+            e.alertException();
+        }
 
         // Inform user of success operation
         Message.modifyTaskSuccess(
@@ -140,11 +145,14 @@ public class TaskHandler {
 
     }
 
-    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) {
+    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
         String formattedTaskDate = EMPTY;
         String formattedTaskTime = EMPTY;
 
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
+            if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
+                throw new PartialCommandException(action + "- date and time");
+            }
             if(!newTaskDate.equals(EMPTY)) {
                 formattedTaskDate = DateTimeParser.parseDate(newTaskDate);
             }
