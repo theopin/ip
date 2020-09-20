@@ -1,38 +1,36 @@
 package duke.parser;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-
-
 
 public class DateTimeParser {
 
     public static final String monthDayYearFormat = "MMM dd yyyy";
+    public static final String xPmFormat = "h:mm a";
 
     public String parseDate(String givenDateFormat) {
         String newDateFormat = "";
         try {
             LocalDate dateGiven = LocalDate.parse(givenDateFormat);
             newDateFormat = dateGiven.format(DateTimeFormatter.ofPattern(monthDayYearFormat));
-        } catch (DateTimeException d) {
+        } catch (DateTimeParseException d) {
             System.out.println("\tError encountered: " + d.getMessage());
         }
 
         return newDateFormat;
     }
 
-    public String parseTime(String givenDateFormat) {
-        String newDateFormat = "";
+    public String parseTime(String givenTimeFormat) {
+        String newTimeFormat = "";
         try {
-            LocalDate dateGiven = LocalDate.parse(givenDateFormat);
-            newDateFormat = dateGiven.format(DateTimeFormatter.ofPattern(monthDayYearFormat));
-        } catch (DateTimeException d) {
+            LocalTime timeGiven = LocalTime.parse(givenTimeFormat);
+            newTimeFormat = timeGiven.format(DateTimeFormatter.ofPattern(xPmFormat));
+        } catch (DateTimeParseException d) {
             System.out.println("\tError encountered: " + d.getMessage());
         }
 
-        return newDateFormat;
+        return newTimeFormat;
     }
 }
