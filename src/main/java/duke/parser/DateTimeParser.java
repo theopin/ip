@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 
 public class DateTimeParser {
 
-    public static final String ERROR = "ERROR";
     public static final String MONTH_DAY_YEAR_FORMAT = "MMM dd yyyy";
     public static final String DAY_MONTH_YEAR_FORMAT = "dd MM yyyy";
     public static final String X_AM_PM_FORMAT = "h:mm a";
@@ -21,7 +20,6 @@ public class DateTimeParser {
             newDateFormat = dateGiven.format(DateTimeFormatter.ofPattern(MONTH_DAY_YEAR_FORMAT));
         } catch (DateTimeParseException d) {
             System.out.println("\tError encountered: " + d.getMessage());
-            return ERROR;
         }
 
         return newDateFormat;
@@ -34,7 +32,6 @@ public class DateTimeParser {
             newTimeFormat = timeGiven.format(DateTimeFormatter.ofPattern(X_AM_PM_FORMAT));
         } catch (DateTimeParseException d) {
             System.out.println("\tError encountered: " + d.getMessage());
-            return ERROR;
         }
 
         return newTimeFormat;

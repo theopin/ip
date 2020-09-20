@@ -142,8 +142,6 @@ public class TaskHandler {
             taskDate = DateTimeParser.parseDate("22 01 1998");
             taskTime = DateTimeParser.parseTime("18:00");
 
-            System.out.println(taskDate);
-            System.out.println(taskTime);
         }
 
         switch (action) {
@@ -154,7 +152,7 @@ public class TaskHandler {
             tasks.add(new Event(newTask, newTaskTimeline));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask, newTaskTimeline));
+            tasks.add(new Deadline(newTask, taskDate, taskTime));
             break;
         default:
             break;
