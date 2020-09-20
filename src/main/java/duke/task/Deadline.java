@@ -17,6 +17,10 @@ public class Deadline extends Task {
         return dueDate;
     }
 
+    public String getDueTime() {
+        return dueTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder deadlineSummary = new StringBuilder();

@@ -47,22 +47,24 @@ public class ReadDataFile extends DataFile {
     public void convertStringToTask(String newTask, int taskIndex) {
         String[] formattedTask = newTask.split(" \\| ");
 
-        String action = "";
+        String action;
         String newTaskDescription = formattedTask[2];
-        String newTaskTimeline = "";
+        String newTaskDate = "";
+        String newTaskTime = "";
 
         boolean isTaskDone = formattedTask[1].equals("1");
 
         // Task is a deadline or event
         if(!formattedTask[0].equals("T")) {
-            newTaskTimeline = formattedTask[3];
+            newTaskDate = formattedTask[3];
+            newTaskTime = formattedTask[4];
         }
         action = getAction(formattedTask[0]);
         if (action == null) {
             return;
         }
 
-        TaskHandler.insertNewTask(action, newTaskDescription, newTaskTimeline);
+        TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime);
         if(isTaskDone) {
             tasks.get(taskIndex).markAsDone(true);
         }

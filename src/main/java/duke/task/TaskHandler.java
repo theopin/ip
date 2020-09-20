@@ -8,6 +8,7 @@ import duke.parser.DateTimeParser;
 import java.util.ArrayList;
 
 public class TaskHandler {
+    public static final String EMPTY = "";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     // String Constants
@@ -112,20 +113,25 @@ public class TaskHandler {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
-        StringBuilder newTaskTimeline = new StringBuilder();
+        String newTaskDate = EMPTY;
+        String newTaskTime = EMPTY;
 
         for (String inputSegment : inputSegments) {
-            if(inputSegment.contains("/")) {
+            if(inputSegment.contains("/") && !hasReachedSplit) {
                 hasReachedSplit = true;
             } else if(!hasReachedSplit && !inputSegment.equals(action)) {
                 newTask.append(WHITESPACE).append(inputSegment);
             } else if(hasReachedSplit)  {
-                newTaskTimeline.append(WHITESPACE).append(inputSegment);
+                if(inputSegment.contains("/")) {
+                    newTaskDate = inputSegment.trim();
+                } else if(inputSegment.contains(":")) {
+                    newTaskTime = inputSegment.trim();
+                }
             }
         }
 
         // Creates a new task type based on the type specified
-        insertNewTask(action, newTask.toString().trim(), newTaskTimeline.toString().trim());
+        insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
 
         // Inform user of success operation
         Message.modifyTaskSuccess(
@@ -134,14 +140,17 @@ public class TaskHandler {
 
     }
 
-    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
-        String taskDate = "";
-        String taskTime = "";
+    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) {
+        String formattedTaskDate = EMPTY;
+        String formattedTaskTime = EMPTY;
 
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
-            taskDate = DateTimeParser.parseDate("22 01 1998");
-            taskTime = DateTimeParser.parseTime("18:00");
-
+            if(!newTaskDate.equals(EMPTY)) {
+                formattedTaskDate = DateTimeParser.parseDate(newTaskDate);
+            }
+            if(!newTaskTime.equals(EMPTY)) {
+                formattedTaskTime = DateTimeParser.parseTime(newTaskTime);
+            }
         }
 
         switch (action) {
@@ -149,10 +158,10 @@ public class TaskHandler {
             tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask, taskDate, taskTime));
+            tasks.add(new Event(newTask, formattedTaskDate, formattedTaskTime));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask, taskDate, taskTime));
+            tasks.add(new Deadline(newTask, formattedTaskDate, formattedTaskTime));
             break;
         default:
             break;
