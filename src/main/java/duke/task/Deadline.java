@@ -19,17 +19,17 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        StringBuilder stringRepresentation = new StringBuilder();
-        stringRepresentation.append("[D]").append(super.toString()).append(" (by: ");
+        StringBuilder deadlineSummary = new StringBuilder();
+        deadlineSummary.append("[D]").append(super.toString()).append(" (by: ");
         if(!dueDate.equals("")) {
-            stringRepresentation.append(dueDate).append(WHITESPACE);
+            deadlineSummary.append(dueDate).append(WHITESPACE);
         }
         if(!dueTime.equals("")) {
-            stringRepresentation.append(dueTime);
+            deadlineSummary.append(dueTime);
         }
-        stringRepresentation.append(")");
+        deadlineSummary.append(")");
 
-        return stringRepresentation.toString();
-        //return "[D]" + super.toString() + " (by: " + dueDate + ")";
+        return deadlineSummary.toString();
+        
     }
 }

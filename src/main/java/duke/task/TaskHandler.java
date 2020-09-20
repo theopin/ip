@@ -149,7 +149,7 @@ public class TaskHandler {
             tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask, newTaskTimeline));
+            tasks.add(new Event(newTask, taskDate, taskTime));
             break;
         case ACTION_DEADLINE:
             tasks.add(new Deadline(newTask, taskDate, taskTime));
@@ -157,7 +157,6 @@ public class TaskHandler {
         default:
             break;
         }
-
     }
 }
 
