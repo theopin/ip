@@ -135,7 +135,7 @@ public class TaskHandler {
             throw new UnknownSearchException();
         }
 
-        Message.printMatchingTasks(filteredTasks);
+        Message.printMatchingTasks(filteredTasks, userFilterInput);
     }
 
     // Prints the whole list of tasks
