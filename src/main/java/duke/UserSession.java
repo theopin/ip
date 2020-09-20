@@ -1,14 +1,10 @@
 package duke;
 
 import duke.data.ReadDataFile;
-
-import duke.exception.IllegalCommandException;
-import duke.exception.PartialCommandException;
 import duke.message.Message;
 import duke.parser.CommandParser;
 
 import static duke.task.TaskHandler.ACTION_EXIT;
-
 
 public class UserSession {
 
