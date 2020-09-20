@@ -1,6 +1,8 @@
 package duke.task;
 
 
+import duke.parser.DateTimeParser;
+
 public class Deadline extends Task {
     protected String dueDate;
     protected String dueTime;

@@ -1,5 +1,7 @@
 package duke.task;
 
+import static duke.parser.DateTimeParser.parseDate;
+import static duke.parser.DateTimeParser.parseTime;
 import static duke.task.TaskHandler.EMPTY;
 import static duke.task.TaskHandler.WHITESPACE;
 
@@ -40,12 +42,12 @@ public class Task {
 
     public static String modifyString(StringBuilder summary, String dueDate, String dueTime) {
         if(!dueDate.equals(EMPTY)) {
-            summary.append(dueDate);
+            summary.append(parseDate(dueDate));
             if(!dueTime.equals(EMPTY)) {
-                summary.append(WHITESPACE).append(dueTime);
+                summary.append(WHITESPACE).append(parseTime(dueTime));
             }
         } else if(!dueTime.equals(EMPTY)) {
-            summary.append(dueTime);
+            summary.append(parseTime(dueTime));
         }
         summary.append(")");
 

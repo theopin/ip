@@ -134,14 +134,13 @@ public class TaskHandler {
         // Creates a new task type based on the type specified
         try {
             insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+            // Inform user of success operation
+            Message.modifyTaskSuccess(
+                    tasks.get(newIndex).toString(), true);
+            new WriteDataFile();
         } catch (PartialCommandException e) {
             e.alertException();
         }
-
-        // Inform user of success operation
-        Message.modifyTaskSuccess(
-                tasks.get(newIndex).toString(), true);
-        new WriteDataFile();
 
     }
 
@@ -151,14 +150,9 @@ public class TaskHandler {
 
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
             if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
-                throw new PartialCommandException(action + "- date and time");
+                throw new PartialCommandException(action + " - date and time");
             }
-            if(!newTaskDate.equals(EMPTY)) {
-                formattedTaskDate = DateTimeParser.parseDate(newTaskDate);
-            }
-            if(!newTaskTime.equals(EMPTY)) {
-                formattedTaskTime = DateTimeParser.parseTime(newTaskTime);
-            }
+
         }
 
         switch (action) {
@@ -166,10 +160,10 @@ public class TaskHandler {
             tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask, formattedTaskDate, formattedTaskTime));
+            tasks.add(new Event(newTask, newTaskDate, newTaskTime));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask, formattedTaskDate, formattedTaskTime));
+            tasks.add(new Deadline(newTask, newTaskDate, newTaskTime));
             break;
         default:
             break;

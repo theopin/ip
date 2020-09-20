@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+import static duke.task.TaskHandler.EMPTY;
 import static duke.task.TaskHandler.tasks;
 
 public class ReadDataFile extends DataFile {
@@ -58,7 +59,7 @@ public class ReadDataFile extends DataFile {
         // Task is a deadline or event
         if(!newTask.equals("") && !formattedTask[0].equals("T")) {
             newTaskDate = formattedTask[3];
-            newTaskTime = formattedTask[4];
+            newTaskTime = (formattedTask.length == 5) ? formattedTask[4] : EMPTY;
         }
         action = getAction(formattedTask[0]);
         if (action == null) {

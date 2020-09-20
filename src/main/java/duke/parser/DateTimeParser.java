@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import static duke.task.TaskHandler.EMPTY;
+
 public class DateTimeParser {
 
     public static final String MONTH_DAY_YEAR_FORMAT = "MMM dd yyyy";
@@ -32,6 +34,7 @@ public class DateTimeParser {
             newTimeFormat = timeGiven.format(DateTimeFormatter.ofPattern(X_AM_PM_FORMAT));
         } catch (DateTimeParseException d) {
             System.out.println("\tError encountered: " + d.getMessage());
+            return EMPTY;
         }
 
         return newTimeFormat;
