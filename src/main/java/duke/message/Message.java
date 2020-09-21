@@ -2,8 +2,14 @@ package duke.message;
 
 import duke.task.Task;
 
+/**
+ * A class that stores methods aimed at printing out certain messages when
+ * the user has activated certain features of a function.
+ */
 public class Message {
-    // Prints the initial greetings when the user loads the program
+    /**
+     * Prints the initial greetings when the user loads the program.
+     */
     public static void printWelcomeText() {
         // Print a horizontal line and duke logo
         printHorizontalLine();
@@ -19,28 +25,40 @@ public class Message {
         printHorizontalLine();
     }
 
-    // Prints a horizontal line
     public static void printHorizontalLine() {
         String horizontalLine = "\t____________________________________________________________";
         System.out.println(horizontalLine);
     }
 
-    // Print exit greetings for the user leaving the program
+    /**
+     * Print exit greetings for the user leaving the program.
+     */
     public static void printExitText() {
         System.out.println("\tBye. Hope to see you again soon!");
         printHorizontalLine();
     }
 
     // Inform user of success in marking task as done
+
+    /**
+     * Print exit greetings for the user leaving the program.
+     */
     public static void printTaskDoneSuccess(String taskName) {
 
         System.out.println("\tNice! I've marked this task as done:");
         System.out.println("\t" + taskName);
     }
 
-    // Inform user of success in adding task to list
+
+    /**
+     * Informs user of success in modifying a task's presence in the list.
+     *
+     * @param taskDescription Description of the task.
+     * @param isAddTask Determines whether the task should be added or
+     *                  removed from the list.
+     */
     public static void modifyTaskSuccess(
-            String taskName, boolean isAddTask) {
+            String taskDescription, boolean isAddTask) {
         String action;
 
         if(isAddTask) {
@@ -52,7 +70,7 @@ public class Message {
         int maxTask = Task.getNumberOfTasks();
 
         System.out.println("\t" + "Got it. I've " + action + " this task: ");
-        System.out.println("\t\t" + taskName);
+        System.out.println("\t\t" + taskDescription);
         System.out.println("\tNow you have "+ maxTask  + " tasks in the list.");
     }
 
