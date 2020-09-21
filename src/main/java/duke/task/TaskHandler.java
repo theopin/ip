@@ -89,7 +89,7 @@ public class TaskHandler {
 
         String deletedTask = tasks.get(oldIndex).toString();
         tasks.remove(oldIndex);
-        Task.taskRemoved();
+        Task.updateTaskCount();
 
         Message.modifyTaskSuccess(
                 deletedTask, false);
