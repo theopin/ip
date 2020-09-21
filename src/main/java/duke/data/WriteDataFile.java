@@ -80,9 +80,6 @@ public class WriteDataFile extends DataFile {
      * @param task The task that is currently being converted into a string.
      *
      */
-    private void extractClass(StringBuilder textBuild, Task task) {
-        if(task.getClass() == Event.class) {
-
     public void extractClass(StringBuilder textBuild, Task task) {
         if(task instanceof Event) {
 
@@ -136,9 +133,7 @@ public class WriteDataFile extends DataFile {
             textBuild.append(((Deadline) task).getDueDate());
         }
     }
-
-
-      
+    
     /**
      * Writes the values of textContent into duke.txt
      *

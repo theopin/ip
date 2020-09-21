@@ -170,9 +170,6 @@ public class TaskHandler {
         Message.printMatchingTasks(filteredTasks, userFilterInput);
     }
 
-    // Prints the whole list of tasks
-    public static void printTaskList() {
-
     /**
      * Creates a new task by generating specific data to be inserted from the user command
      * into this task.
@@ -180,7 +177,7 @@ public class TaskHandler {
      * @param inputSegments  Array of strings that consist of each word of the user command.
      * @param action Name of the particular task that the user wishes to executes.
      */
-    private static void createNewTask(String[] inputSegments, String action) {
+    private void createNewTask(String[] inputSegments, String action) {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
@@ -219,15 +216,13 @@ public class TaskHandler {
      * into this task.
      *
      * @param action Name of the particular task that the user wishes to executes.
-     * @param newTask Description of the task
-     * @param newTaskTimeline Date and time of the task
+     * @param newTask Description of the task.
+     * @param newTaskDate Date of the task.
+     * @param newTaskTime Time of the task.
      */
 
 
     public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
-        String formattedTaskDate = EMPTY;
-        String formattedTaskTime = EMPTY;
-
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
             if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
                 throw new PartialCommandException(action + " - date and time");
