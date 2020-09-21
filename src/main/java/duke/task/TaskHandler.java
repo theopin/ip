@@ -31,7 +31,7 @@ public class TaskHandler {
      * Executes the action specified in the user input
      * If the position is unset, NaN is returned.
      *
-     * @param userInput command given by the user.
+     * @param userInput Command given by the user.
      */
     private void parseUserInput(String [] userInput) {
         String action = userInput[0];
