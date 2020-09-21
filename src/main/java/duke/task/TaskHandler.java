@@ -170,7 +170,7 @@ public class TaskHandler {
      * @param newTask Description of the task
      * @param newTaskTimeline Date and time of the task
      */
-    private static void insertNewTask(String action, String newTask, String newTaskTimeline) {
+    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
         switch (action) {
         case ACTION_TODO:
             tasks.add(new Todo(newTask));
