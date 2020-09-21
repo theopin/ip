@@ -1,16 +1,23 @@
 package duke.task;
 
+
+import duke.exception.RangeExceedException;
 import duke.parser.DateTimeParser;
 
 import static duke.task.TaskHandler.EMPTY;
 import static duke.task.TaskHandler.WHITESPACE;
 
+/**
+ * Represents an event type of tasks. Mainly used to mark a future
+ * event for the user to take note of.
+ */
 public class Event extends Task {
 
     protected String allocatedDate;
     protected String allocatedTime;
 
-    // duke.task.Event Constructor
+
+    // Event Constructor
     public Event(String description, String allocatedDate, String allocatedTime) {
         super(description);
         this.allocatedDate = allocatedDate;
@@ -25,6 +32,9 @@ public class Event extends Task {
         return allocatedDate;
     }
 
+    /**
+     * Converts the Event Task into a string.
+     */
     @Override
     public String toString() {
         StringBuilder eventSummary = new StringBuilder();

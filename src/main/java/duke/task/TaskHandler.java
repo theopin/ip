@@ -8,8 +8,12 @@ import duke.message.Message;
 import duke.parser.DateTimeParser;
 
 import java.util.ArrayList;
-
 import static java.util.stream.Collectors.toList;
+
+/**
+ * Handles user commands that aim at performing certain functions related to
+ * handling a task.
+ */
 
 public class TaskHandler {
     public static final String EMPTY = "";
@@ -30,8 +34,13 @@ public class TaskHandler {
         parseUserInput(userInput);
     }
 
-    // Deciphers the action to be done based on the input
-    public void parseUserInput(String [] userInput) {
+    /**
+     * Executes the action specified in the user input
+     * If the position is unset, NaN is returned.
+     *
+     * @param userInput Command given by the user.
+     */
+    private void parseUserInput(String [] userInput) {
         String action = userInput[0];
 
         // Run the respective methods based on the action
@@ -79,9 +88,12 @@ public class TaskHandler {
         Message.printHorizontalLine();
     }
 
-
-
-
+    /**
+     * Removes a specified task from the list.
+     *
+     * @param taskNumber  Task that the user wants to be removed
+     * @throws RangeExceedException  If taskNumber > size of list of tasks.
+     */
     private void removeTask(String taskNumber) throws RangeExceedException {
         int oldIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
@@ -92,7 +104,7 @@ public class TaskHandler {
 
         String deletedTask = tasks.get(oldIndex).toString();
         tasks.remove(oldIndex);
-        Task.taskRemoved();
+        Task.updateTaskCount();
 
         Message.modifyTaskSuccess(
                 deletedTask, false);
@@ -100,8 +112,13 @@ public class TaskHandler {
 
     }
 
-    // Sets the particular task as done
-    public static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
+    /**
+     * Marks a specified task from the list as done.
+     *
+     * @param taskNumber  Task that the user wants to be set as done
+     * @throws RangeExceedException  If taskNumber > size of list of tasks.
+     */
+    private static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
 
@@ -114,6 +131,18 @@ public class TaskHandler {
         new WriteDataFile();
     }
 
+    /**
+     * Prints all tasks present in the list.
+     */
+    private static void printTaskList() {
+        System.out.println("\tHere are the tasks in your list:");
+
+        // Print each task based on a specified format
+        for (Task task: tasks) {
+            System.out.println("\t" + task.toString());
+        }
+    }
+  
     private String extractSearchFilter(String[] userInput) {
         StringBuilder searchFilter = new StringBuilder();
         int userInputLength = userInput.length;
@@ -143,16 +172,15 @@ public class TaskHandler {
 
     // Prints the whole list of tasks
     public static void printTaskList() {
-        System.out.println("\tHere are the tasks in your list:");
 
-        // Print each task based on a specified format
-        for (Task task: tasks) {
-            System.out.println("\t" + task.toString());
-        }
-    }
-
-    // Creates a new task based on its type
-    public static void createNewTask(String[] inputSegments, String action) {
+    /**
+     * Creates a new task by generating specific data to be inserted from the user command
+     * into this task.
+     *
+     * @param inputSegments  Array of strings that consist of each word of the user command.
+     * @param action Name of the particular task that the user wishes to executes.
+     */
+    private static void createNewTask(String[] inputSegments, String action) {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
@@ -186,6 +214,16 @@ public class TaskHandler {
 
     }
 
+    /**
+     * Creates a new task based on the action specified and inserts specific data
+     * into this task.
+     *
+     * @param action Name of the particular task that the user wishes to executes.
+     * @param newTask Description of the task
+     * @param newTaskTimeline Date and time of the task
+     */
+
+
     public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
         String formattedTaskDate = EMPTY;
         String formattedTaskTime = EMPTY;
@@ -194,7 +232,6 @@ public class TaskHandler {
             if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
                 throw new PartialCommandException(action + " - date and time");
             }
-
         }
 
         switch (action) {

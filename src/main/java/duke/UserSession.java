@@ -6,6 +6,9 @@ import duke.parser.CommandParser;
 
 import static duke.task.TaskHandler.ACTION_EXIT;
 
+/**
+ * Represents a new instance of the user running the application.
+ */
 public class UserSession {
 
     public UserSession() {
@@ -13,7 +16,9 @@ public class UserSession {
         runProgramSequence();
     }
 
-    // Overall structure of a user session
+    /**
+     * Runs the program based on a given sequence
+     */
     public void runProgramSequence() {
         String action = "";
         CommandParser newUserCommand;
