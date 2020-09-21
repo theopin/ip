@@ -3,10 +3,13 @@ package duke.task;
 import duke.data.WriteDataFile;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
+import duke.exception.UnknownSearchException;
 import duke.message.Message;
 import duke.parser.DateTimeParser;
 
 import java.util.ArrayList;
+
+import static java.util.stream.Collectors.toList;
 
 public class TaskHandler {
     public static final String EMPTY = "";
@@ -19,6 +22,7 @@ public class TaskHandler {
     public static final String ACTION_DONE = "done";
     public static final String ACTION_DEADLINE = "deadline";
     public static final String ACTION_EXIT = "bye";
+    public static final String ACTION_FIND = "find";
     public static final String ACTION_REMOVE = "remove";
     public static final String WHITESPACE = " ";
 
@@ -46,6 +50,14 @@ public class TaskHandler {
                 e.alertException();
             }
             break;
+        case ACTION_FIND:
+            try {
+                String searchFilter = extractSearchFilter(userInput);
+                findMatchingTasks(searchFilter);
+            } catch (UnknownSearchException e) {
+                e.alertException();
+            }
+            break;
         case ACTION_LIST:
             printTaskList();
             break;
@@ -66,6 +78,9 @@ public class TaskHandler {
 
         Message.printHorizontalLine();
     }
+
+
+
 
     private void removeTask(String taskNumber) throws RangeExceedException {
         int oldIndex = Integer.parseInt(taskNumber) - 1;
@@ -97,6 +112,33 @@ public class TaskHandler {
         tasks.get(taskIndex).markAsDone(true);
         Message.printTaskDoneSuccess(tasks.get(taskIndex).toString());
         new WriteDataFile();
+    }
+
+    private String extractSearchFilter(String[] userInput) {
+        StringBuilder searchFilter = new StringBuilder();
+        int userInputLength = userInput.length;
+        for (int i = 0; i < userInputLength; i++) {
+            if(i != 0) {
+                searchFilter.append(userInput[i]);
+            }
+            if(i != 0 && i < userInputLength - 1) {
+                searchFilter.append(WHITESPACE);
+            }
+        }
+
+        return searchFilter.toString();
+    }
+
+    private void findMatchingTasks(String userFilterInput) throws UnknownSearchException {
+        ArrayList<Task> filteredTasks;
+        filteredTasks = (ArrayList<Task>) tasks.stream()
+                .filter((s) -> s.getDescription().contains(userFilterInput))
+                .collect(toList());
+        if (filteredTasks.size() == 0) {
+            throw new UnknownSearchException();
+        }
+
+        Message.printMatchingTasks(filteredTasks, userFilterInput);
     }
 
     // Prints the whole list of tasks

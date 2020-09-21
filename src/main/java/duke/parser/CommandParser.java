@@ -19,7 +19,7 @@ public class CommandParser {
     public static final String WHITESPACE = " ";
 
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
-    private static final String[] markTaskTypes = {ACTION_DONE, ACTION_REMOVE};
+    private static final String[] taskRelatedCommand = {ACTION_DONE, ACTION_REMOVE, ACTION_FIND};
     private static final String[] standaloneCommand = {ACTION_EXIT, ACTION_LIST};
 
     private String actionCommand = "";
@@ -50,7 +50,7 @@ public class CommandParser {
 
         if (!(Arrays.asList(standaloneCommand).contains(splitCommand[0]))) {
             if (!Arrays.asList(taskTypes).contains(splitCommand[0])
-                && !Arrays.asList(markTaskTypes).contains(splitCommand[0])) {
+                && !Arrays.asList(taskRelatedCommand).contains(splitCommand[0])) {
                 throw new IllegalCommandException();
             }
 
