@@ -1,5 +1,6 @@
 package duke.data;
 
+import duke.exception.PartialCommandException;
 import duke.task.TaskHandler;
 
 import java.io.File;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Scanner;
 
+import static duke.task.TaskHandler.EMPTY;
 import static duke.task.TaskHandler.tasks;
 
 /**
@@ -73,22 +75,28 @@ public class ReadDataFile extends DataFile {
     private void convertStringToTask(String newTask, int taskIndex) {
         String[] formattedTask = newTask.split(" \\| ");
 
-        String action = "";
+        String action;
         String newTaskDescription = formattedTask[2];
-        String newTaskTimeline = "";
+        String newTaskDate = "";
+        String newTaskTime = "";
 
         boolean isTaskDone = formattedTask[1].equals("1");
 
         // Task is a deadline or event
-        if(!formattedTask[0].equals("T")) {
-            newTaskTimeline = formattedTask[3];
+        if(!newTask.equals("") && !formattedTask[0].equals("T")) {
+            newTaskDate = formattedTask[3];
+            newTaskTime = (formattedTask.length == 5) ? formattedTask[4] : EMPTY;
         }
         action = getAction(formattedTask[0]);
         if (action == null) {
             return;
         }
 
-        TaskHandler.insertNewTask(action, newTaskDescription, newTaskTimeline);
+        try {
+            TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime);
+        } catch (PartialCommandException e) {
+            e.alertException();
+        }
         if(isTaskDone) {
             tasks.get(taskIndex).markAsDone(true);
         }

@@ -1,5 +1,9 @@
 package duke.task;
 
+import static duke.parser.DateTimeParser.parseDate;
+import static duke.parser.DateTimeParser.parseTime;
+import static duke.task.TaskHandler.EMPTY;
+import static duke.task.TaskHandler.WHITESPACE;
 
 /**
  * Represents a general Task. The methods here are generic and can be
@@ -40,12 +44,29 @@ public class Task {
     public static void updateTaskCount() {
         numberOfTasks--;
     }
+
     
     /**
      * Converts the Task into a string.
      */
+    public static String modifyString(StringBuilder summary, String dueDate, String dueTime) {
+        if(!dueDate.equals(EMPTY)) {
+            summary.append(parseDate(dueDate));
+            if(!dueTime.equals(EMPTY)) {
+                summary.append(WHITESPACE).append(parseTime(dueTime));
+            }
+        } else if(!dueTime.equals(EMPTY)) {
+            summary.append(parseTime(dueTime));
+        }
+        summary.append(")");
+
+        return summary.toString();
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
+
+
 }

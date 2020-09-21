@@ -1,16 +1,22 @@
 package duke.task;
 
 import duke.data.WriteDataFile;
+import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
+import duke.exception.UnknownSearchException;
 import duke.message.Message;
+import duke.parser.DateTimeParser;
 
 import java.util.ArrayList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Handles user commands that aim at performing certain functions related to
  * handling a task.
  */
+
 public class TaskHandler {
+    public static final String EMPTY = "";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     // String Constants
@@ -20,6 +26,7 @@ public class TaskHandler {
     public static final String ACTION_DONE = "done";
     public static final String ACTION_DEADLINE = "deadline";
     public static final String ACTION_EXIT = "bye";
+    public static final String ACTION_FIND = "find";
     public static final String ACTION_REMOVE = "remove";
     public static final String WHITESPACE = " ";
 
@@ -49,6 +56,14 @@ public class TaskHandler {
             try {
                 removeTask(userInput[1]);
             } catch (RangeExceedException e) {
+                e.alertException();
+            }
+            break;
+        case ACTION_FIND:
+            try {
+                String searchFilter = extractSearchFilter(userInput);
+                findMatchingTasks(searchFilter);
+            } catch (UnknownSearchException e) {
                 e.alertException();
             }
             break;
@@ -127,7 +142,36 @@ public class TaskHandler {
             System.out.println("\t" + task.toString());
         }
     }
+  
+    private String extractSearchFilter(String[] userInput) {
+        StringBuilder searchFilter = new StringBuilder();
+        int userInputLength = userInput.length;
+        for (int i = 0; i < userInputLength; i++) {
+            if(i != 0) {
+                searchFilter.append(userInput[i]);
+            }
+            if(i != 0 && i < userInputLength - 1) {
+                searchFilter.append(WHITESPACE);
+            }
+        }
 
+        return searchFilter.toString();
+    }
+
+    private void findMatchingTasks(String userFilterInput) throws UnknownSearchException {
+        ArrayList<Task> filteredTasks;
+        filteredTasks = (ArrayList<Task>) tasks.stream()
+                .filter((s) -> s.getDescription().contains(userFilterInput))
+                .collect(toList());
+        if (filteredTasks.size() == 0) {
+            throw new UnknownSearchException();
+        }
+
+        Message.printMatchingTasks(filteredTasks, userFilterInput);
+    }
+
+    // Prints the whole list of tasks
+    public static void printTaskList() {
 
     /**
      * Creates a new task by generating specific data to be inserted from the user command
@@ -140,25 +184,33 @@ public class TaskHandler {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
-        StringBuilder newTaskTimeline = new StringBuilder();
+        String newTaskDate = EMPTY;
+        String newTaskTime = EMPTY;
 
         for (String inputSegment : inputSegments) {
-            if(inputSegment.contains("/")) {
+            if(inputSegment.contains("/") && !hasReachedSplit) {
                 hasReachedSplit = true;
             } else if(!hasReachedSplit && !inputSegment.equals(action)) {
                 newTask.append(WHITESPACE).append(inputSegment);
             } else if(hasReachedSplit)  {
-                newTaskTimeline.append(WHITESPACE).append(inputSegment);
+                if(inputSegment.contains("/")) {
+                    newTaskDate = inputSegment.trim();
+                } else if(inputSegment.contains(":")) {
+                    newTaskTime = inputSegment.trim();
+                }
             }
         }
 
         // Creates a new task type based on the type specified
-        insertNewTask(action, newTask.toString().trim(), newTaskTimeline.toString().trim());
-
-        // Inform user of success operation
-        Message.modifyTaskSuccess(
-                tasks.get(newIndex).toString(), true);
-        new WriteDataFile();
+        try {
+            insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+            // Inform user of success operation
+            Message.modifyTaskSuccess(
+                    tasks.get(newIndex).toString(), true);
+            new WriteDataFile();
+        } catch (PartialCommandException e) {
+            e.alertException();
+        }
 
     }
 
@@ -170,21 +222,31 @@ public class TaskHandler {
      * @param newTask Description of the task
      * @param newTaskTimeline Date and time of the task
      */
-    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
+
+
+    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
+        String formattedTaskDate = EMPTY;
+        String formattedTaskTime = EMPTY;
+
+        if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
+            if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
+                throw new PartialCommandException(action + " - date and time");
+            }
+        }
+
         switch (action) {
         case ACTION_TODO:
             tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask, newTaskTimeline));
+            tasks.add(new Event(newTask, newTaskDate, newTaskTime));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask, newTaskTimeline));
+            tasks.add(new Deadline(newTask, newTaskDate, newTaskTime));
             break;
         default:
             break;
         }
-
     }
 }
 

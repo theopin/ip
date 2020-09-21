@@ -1,6 +1,7 @@
 package duke.message;
 
 import duke.task.Task;
+import java.util.ArrayList;
 
 /**
  * A class that stores methods aimed at printing out certain messages when
@@ -74,4 +75,12 @@ public class Message {
         System.out.println("\tNow you have "+ maxTask  + " tasks in the list.");
     }
 
+    public static void printMatchingTasks(ArrayList<Task> filteredTasks, String searchFilter) {
+        int taskCount = 1;
+        System.out.println("\tHere are the tasks that match this command - "+ searchFilter + " :");
+        for (Task filteredTask: filteredTasks){
+            System.out.println("\t" + taskCount + ". "+ filteredTask.toString());
+            taskCount++;
+        }
+    }
 }
