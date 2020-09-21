@@ -6,6 +6,10 @@ import duke.message.Message;
 
 import java.util.ArrayList;
 
+/**
+ * Handles user commands that aim at performing certain functions related to
+ * handling a task.
+ */
 public class TaskHandler {
     public static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -23,8 +27,13 @@ public class TaskHandler {
         parseUserInput(userInput);
     }
 
-    // Deciphers the action to be done based on the input
-    public void parseUserInput(String [] userInput) {
+    /**
+     * Executes the action specified in the user input
+     * If the position is unset, NaN is returned.
+     *
+     * @param userInput command given by the user.
+     */
+    private void parseUserInput(String [] userInput) {
         String action = userInput[0];
 
         // Run the respective methods based on the action
@@ -64,6 +73,12 @@ public class TaskHandler {
         Message.printHorizontalLine();
     }
 
+    /**
+     * Removes a specified task from the list.
+     *
+     * @param taskNumber  Task that the user wants to be removed
+     * @throws RangeExceedException  If taskNumber > size of list of tasks.
+     */
     private void removeTask(String taskNumber) throws RangeExceedException {
         int oldIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
@@ -82,8 +97,13 @@ public class TaskHandler {
 
     }
 
-    // Sets the particular task as done
-    public static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
+    /**
+     * Marks a specified task from the list as done.
+     *
+     * @param taskNumber  Task that the user wants to be set as done
+     * @throws RangeExceedException  If taskNumber > size of list of tasks.
+     */
+    private static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
         int taskIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
 
@@ -96,8 +116,10 @@ public class TaskHandler {
         new WriteDataFile();
     }
 
-    // Prints the whole list of tasks
-    public static void printTaskList() {
+    /**
+     * Prints all tasks present in the list.
+     */
+    private static void printTaskList() {
         System.out.println("\tHere are the tasks in your list:");
 
         // Print each task based on a specified format
@@ -106,8 +128,15 @@ public class TaskHandler {
         }
     }
 
-    // Creates a new task based on its type
-    public static void createNewTask(String[] inputSegments, String action) {
+
+    /**
+     * Creates a new task by generating specific data to be inserted from the user command
+     * into this task.
+     *
+     * @param inputSegments  Array of strings that consist of each word of the user command.
+     * @param action Name of the particular task that the user wishes to executes.
+     */
+    private static void createNewTask(String[] inputSegments, String action) {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
@@ -133,7 +162,15 @@ public class TaskHandler {
 
     }
 
-    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
+    /**
+     * Creates a new task based on the action specified and inserts specific data
+     * into this task.
+     *
+     * @param action Name of the particular task that the user wishes to executes.
+     * @param newTask Description of the task
+     * @param newTaskTimeline Date and time of the task
+     */
+    private static void insertNewTask(String action, String newTask, String newTaskTimeline) {
         switch (action) {
         case ACTION_TODO:
             tasks.add(new Todo(newTask));
