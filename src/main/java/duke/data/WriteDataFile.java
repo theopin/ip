@@ -43,16 +43,18 @@ public class WriteDataFile extends DataFile {
         textBuild.append(" | ");
         textBuild.append(task.getDescription());
 
-        if (task.getClass() != Todo.class) {
+        if (!(task instanceof Todo)) {
+            extractDate(textBuild, task);
+            textBuild.append(" | ");
             extractTime(textBuild, task);
         }
         textBuild.append(System.lineSeparator());
     }
 
     public void extractClass(StringBuilder textBuild, Task task) {
-        if(task.getClass() == Event.class) {
+        if(task instanceof Event) {
             textBuild.append("E");
-        } else if(task.getClass() == Deadline.class) {
+        } else if(task instanceof Deadline) {
             textBuild.append("D");
         } else {
             textBuild.append("T");
@@ -67,13 +69,21 @@ public class WriteDataFile extends DataFile {
         }
     }
 
-    public void extractTime(StringBuilder textBuild, Task task) {
-        if(task.getClass() == Event.class) {
+    private void extractDate(StringBuilder textBuild, Task task) {
+        if(task instanceof Event) {
             textBuild.append(" | ");
-            textBuild.append(((Event) task).getAllocatedTime());
-        } else if(task.getClass() == Deadline.class) {
+            textBuild.append(((Event) task).getAllocatedDate());
+        } else if(task instanceof Deadline) {
             textBuild.append(" | ");
             textBuild.append(((Deadline) task).getDueDate());
+        }
+    }
+
+    public void extractTime(StringBuilder textBuild, Task task) {
+        if(task instanceof Event) {
+            textBuild.append(((Event) task).getAllocatedTime());
+        } else if(task instanceof Deadline) {
+            textBuild.append(((Deadline) task).getDueTime());
         }
     }
 

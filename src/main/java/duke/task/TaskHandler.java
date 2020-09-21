@@ -1,12 +1,15 @@
 package duke.task;
 
 import duke.data.WriteDataFile;
+import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
 import duke.message.Message;
+import duke.parser.DateTimeParser;
 
 import java.util.ArrayList;
 
 public class TaskHandler {
+    public static final String EMPTY = "";
     public static ArrayList<Task> tasks = new ArrayList<>();
 
     // String Constants
@@ -111,43 +114,60 @@ public class TaskHandler {
         int newIndex = Task.getNumberOfTasks();
         boolean hasReachedSplit = false;
         StringBuilder newTask = new StringBuilder();
-        StringBuilder newTaskTimeline = new StringBuilder();
+        String newTaskDate = EMPTY;
+        String newTaskTime = EMPTY;
 
         for (String inputSegment : inputSegments) {
-            if(inputSegment.contains("/")) {
+            if(inputSegment.contains("/") && !hasReachedSplit) {
                 hasReachedSplit = true;
             } else if(!hasReachedSplit && !inputSegment.equals(action)) {
                 newTask.append(WHITESPACE).append(inputSegment);
             } else if(hasReachedSplit)  {
-                newTaskTimeline.append(WHITESPACE).append(inputSegment);
+                if(inputSegment.contains("/")) {
+                    newTaskDate = inputSegment.trim();
+                } else if(inputSegment.contains(":")) {
+                    newTaskTime = inputSegment.trim();
+                }
             }
         }
 
         // Creates a new task type based on the type specified
-        insertNewTask(action, newTask.toString().trim(), newTaskTimeline.toString().trim());
-
-        // Inform user of success operation
-        Message.modifyTaskSuccess(
-                tasks.get(newIndex).toString(), true);
-        new WriteDataFile();
+        try {
+            insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+            // Inform user of success operation
+            Message.modifyTaskSuccess(
+                    tasks.get(newIndex).toString(), true);
+            new WriteDataFile();
+        } catch (PartialCommandException e) {
+            e.alertException();
+        }
 
     }
 
-    public static void insertNewTask(String action, String newTask, String newTaskTimeline) {
+    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
+        String formattedTaskDate = EMPTY;
+        String formattedTaskTime = EMPTY;
+
+        if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
+            if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
+                throw new PartialCommandException(action + " - date and time");
+            }
+
+        }
+
         switch (action) {
         case ACTION_TODO:
             tasks.add(new Todo(newTask));
             break;
         case ACTION_EVENT:
-            tasks.add(new Event(newTask, newTaskTimeline));
+            tasks.add(new Event(newTask, newTaskDate, newTaskTime));
             break;
         case ACTION_DEADLINE:
-            tasks.add(new Deadline(newTask, newTaskTimeline));
+            tasks.add(new Deadline(newTask, newTaskDate, newTaskTime));
             break;
         default:
             break;
         }
-
     }
 }
 
