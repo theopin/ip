@@ -42,6 +42,7 @@ public class CommandParser {
             e.alertException();
         } catch (PartialCommandException p) {
             p.alertException();
+            Message.printHorizontalLine();
         }
     }
 
