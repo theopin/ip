@@ -21,6 +21,6 @@ public class PartialCommandException extends DukeException {
      */
     @Override
     public void alertException() {
-        System.out.println("\t" + faultyAction + " cannot be incomplete! Please Try Again!");
+        System.out.println("\t" + faultyAction + " parameters are invalid! Please Try Again!");
     }
 }

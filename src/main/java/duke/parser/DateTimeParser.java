@@ -27,7 +27,7 @@ public class DateTimeParser {
 
             newDateFormat = dateGiven.format(DateTimeFormatter.ofPattern(MONTH_DAY_YEAR_FORMAT));
         } catch (DateTimeParseException d) {
-            System.out.println("\tError encountered: " + d.getMessage());
+            System.out.println("\tError encountered with parsing Date: " + d.getMessage());
         }
 
         return newDateFormat;
@@ -45,7 +45,7 @@ public class DateTimeParser {
             LocalTime timeGiven = LocalTime.parse(givenTimeFormat);
             newTimeFormat = timeGiven.format(DateTimeFormatter.ofPattern(X_AM_PM_FORMAT));
         } catch (DateTimeParseException d) {
-            System.out.println("\tError encountered: " + d.getMessage());
+            System.out.println("\tError encountered with parsing Time: " + d.getMessage());
             return EMPTY;
         }
 

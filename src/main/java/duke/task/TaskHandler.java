@@ -7,13 +7,15 @@ import duke.exception.UnknownSearchException;
 import duke.message.Message;
 
 import java.util.ArrayList;
+
+import static duke.parser.DateTimeParser.parseDate;
+import static duke.parser.DateTimeParser.parseTime;
 import static java.util.stream.Collectors.toList;
 
 /**
  * Handles user commands that aim at performing certain functions related to
  * handling a task.
  */
-
 public class TaskHandler {
     public static final String EMPTY = "";
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -96,7 +98,6 @@ public class TaskHandler {
      */
     private void removeTask(String taskNumber) throws RangeExceedException {
         int maxTask = Task.getNumberOfTasks();
-        int oldIndex = 0;
         if(taskNumber.equals(ALL_TASKS)) {
             while (maxTask != 0) {
                 tasks.remove(0);
@@ -105,6 +106,7 @@ public class TaskHandler {
             }
             Message.clearTaskListSuccess();
         } else {
+            int oldIndex;
             try {
                 oldIndex = Integer.parseInt(taskNumber) - 1;
             } catch (NumberFormatException nfe) {
@@ -243,12 +245,20 @@ public class TaskHandler {
      * @param newTaskDate Date of the task.
      * @param newTaskTime Time of the task.
      */
-
-
     public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
+        if(newTask.equals(EMPTY)) {
+            throw new PartialCommandException(action + " - task");
+        }
+
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
-            if(newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
+            if (newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
                 throw new PartialCommandException(action + " - date and time");
+            } else {
+                String parsedTaskDate = parseDate(newTaskDate);
+                String parsedTaskTime = parseTime(newTaskTime);
+                if (parsedTaskDate.equals(EMPTY) && parsedTaskTime.equals(EMPTY)) {
+                    throw new PartialCommandException(action + " - date and time");
+                }
             }
         }
 
