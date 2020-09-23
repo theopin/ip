@@ -17,7 +17,7 @@ public class UserSession {
     }
 
     /**
-     * Runs the program based on a given sequence
+     * Runs the program based on a given sequence.
      */
     public void runProgramSequence() {
         String action = "";

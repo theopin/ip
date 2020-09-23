@@ -28,6 +28,9 @@ public class CommandParser {
         requestUserInput();
     }
 
+    /**
+     * Takes in a command given by the user.
+     */
     public void requestUserInput()  {
         String[] userInput;
         try {
@@ -42,7 +45,13 @@ public class CommandParser {
         }
     }
 
-    // Takes in input from the user
+    /**
+     * Writes the values of textContent into duke.txt.
+     *
+     * @throws IllegalCommandException Thrown if the user command does not match any
+     *                                 predefined action.
+     * @throws PartialCommandException Thrown if the user command is incomplete.
+     */
     public String[] receiveUserInput() throws IllegalCommandException, PartialCommandException {
         String userCommand = myScanner.nextLine().trim();
         Message.printHorizontalLine();

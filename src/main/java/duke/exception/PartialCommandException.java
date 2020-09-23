@@ -16,6 +16,9 @@ public class PartialCommandException extends DukeException {
         this.faultyAction = faultyAction;
     }
 
+    /**
+     * Informs user of the incomplete command
+     */
     @Override
     public void alertException() {
         System.out.println("\t" + faultyAction + " cannot be incomplete! Please Try Again!");

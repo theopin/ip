@@ -52,7 +52,7 @@ public class WriteDataFile extends DataFile {
      * format.
      *
      * @param textBuild A stringBuilder object that takes in multiple
-     *                  string inputs regading various features of the task.
+     *                  string inputs regarding various features of the task.
      * @param task The task that is currently being converted into a string.
      *
      */
@@ -76,11 +76,11 @@ public class WriteDataFile extends DataFile {
      * Appends the type of task into the stringBuilder.
      *
      * @param textBuild A stringBuilder object that takes in multiple
-     *                  string inputs regading various features of the task.
+     *                  string inputs regarding various features of the task.
      * @param task The task that is currently being converted into a string.
      *
      */
-    public void extractClass(StringBuilder textBuild, Task task) {
+    private void extractClass(StringBuilder textBuild, Task task) {
         if(task instanceof Event) {
 
             textBuild.append("E");
@@ -95,7 +95,7 @@ public class WriteDataFile extends DataFile {
      * Appends the status of completion of the task into the stringBuilder.
      *
      * @param textBuild A stringBuilder object that takes in multiple
-     *                  string inputs regading various features of the task.
+     *                  string inputs regarding various features of the task.
      * @param task The task that is currently being converted into a string.
      *
      */
@@ -112,11 +112,11 @@ public class WriteDataFile extends DataFile {
      * Appends the time of the task into the stringBuilder.
      *
      * @param textBuild A stringBuilder object that takes in multiple
-     *                  string inputs regading various features of the task.
+     *                  string inputs regarding various features of the task.
      * @param task The task that is currently being converted into a string.
      *
      */
-    public void extractTime(StringBuilder textBuild, Task task) {
+    private void extractTime(StringBuilder textBuild, Task task) {
         if(task instanceof Event) {
             textBuild.append(((Event) task).getAllocatedTime());
         } else if(task instanceof Deadline) {
@@ -124,6 +124,14 @@ public class WriteDataFile extends DataFile {
         }
     }
 
+    /**
+     * Appends the date of the task into the stringBuilder.
+     *
+     * @param textBuild A stringBuilder object that takes in multiple
+     *                  string inputs regarding various features of the task.
+     * @param task The task that is currently being converted into a string.
+     *
+     */
     private void extractDate(StringBuilder textBuild, Task task) {
         if(task instanceof Event) {
             textBuild.append(" | ");

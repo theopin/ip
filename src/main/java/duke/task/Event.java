@@ -1,12 +1,5 @@
 package duke.task;
 
-
-import duke.exception.RangeExceedException;
-import duke.parser.DateTimeParser;
-
-import static duke.task.TaskHandler.EMPTY;
-import static duke.task.TaskHandler.WHITESPACE;
-
 /**
  * Represents an event type of tasks. Mainly used to mark a future
  * event for the user to take note of.

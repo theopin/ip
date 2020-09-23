@@ -1,5 +1,4 @@
 package duke.task;
-import duke.parser.DateTimeParser;
 
 /**
  * Represents a deadline type of tasks. Mainly used to mark a future

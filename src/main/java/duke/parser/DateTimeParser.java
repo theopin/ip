@@ -13,6 +13,12 @@ public class DateTimeParser {
     public static final String DAY_MONTH_YEAR_FORMAT = "dd/MM/yyyy";
     public static final String X_AM_PM_FORMAT = "h:mm a";
 
+    /**
+     * Parses the date given by the user in the form (Day/Month/Year) and
+     * returns it in another format (Month Day Year).
+     *
+     * @param givenDateFormat A String containing the date given by the user.
+     */
     public static String parseDate(String givenDateFormat) {
         String newDateFormat = "";
         try {
@@ -27,6 +33,12 @@ public class DateTimeParser {
         return newDateFormat;
     }
 
+    /**
+     * Parses the time given by the user in the form (HH:MM) and
+     * returns it in another format (H:MM AM) or (H:MM PM).
+     *
+     * @param givenTimeFormat A String containing the time given by the user.
+     */
     public static String parseTime(String givenTimeFormat) {
         String newTimeFormat = "";
         try {
