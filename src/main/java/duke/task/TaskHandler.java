@@ -28,6 +28,7 @@ public class TaskHandler {
     public static final String ACTION_FIND = "find";
     public static final String ACTION_REMOVE = "remove";
     public static final String WHITESPACE = " ";
+    public static final String ALL_TASKS = "all";
 
     public TaskHandler(String[] userInput) {
         parseUserInput(userInput);
@@ -94,19 +95,35 @@ public class TaskHandler {
      * @throws RangeExceedException  If taskNumber > size of list of tasks.
      */
     private void removeTask(String taskNumber) throws RangeExceedException {
-        int oldIndex = Integer.parseInt(taskNumber) - 1;
         int maxTask = Task.getNumberOfTasks();
+        int oldIndex = 0;
+        if(taskNumber.equals(ALL_TASKS)) {
+            while (maxTask != 0) {
+                tasks.remove(0);
+                Task.updateTaskCount();
+                maxTask--;
+            }
+            Message.clearTaskListSuccess();
+        } else {
+            try {
+                oldIndex = Integer.parseInt(taskNumber) - 1;
+            } catch (NumberFormatException nfe) {
+                System.out.println("\tError Encountered - invalid input!");
+                return;
+            }
 
-        if(oldIndex < 0 || oldIndex >= maxTask) {
-            throw new RangeExceedException();
+            if(oldIndex < 0 || oldIndex >= maxTask) {
+                throw new RangeExceedException();
+            }
+
+            String deletedTask = tasks.get(oldIndex).toString();
+            tasks.remove(oldIndex);
+            Task.updateTaskCount();
+
+            Message.modifyTaskSuccess(
+                    deletedTask, false);
         }
 
-        String deletedTask = tasks.get(oldIndex).toString();
-        tasks.remove(oldIndex);
-        Task.updateTaskCount();
-
-        Message.modifyTaskSuccess(
-                deletedTask, false);
         new WriteDataFile();
 
     }

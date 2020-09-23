@@ -83,4 +83,9 @@ public class Message {
             taskCount++;
         }
     }
+
+    public static void clearTaskListSuccess() {
+        System.out.println("\t" + "Got it. I've cleared all tasks in the list!");
+        System.out.println("\tNow you have no tasks in the list.");
+    }
 }
