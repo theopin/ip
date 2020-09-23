@@ -135,8 +135,15 @@ public class TaskHandler {
      * @throws RangeExceedException  If taskNumber > size of list of tasks.
      */
     private static void setTaskAsComplete(String taskNumber) throws RangeExceedException {
-        int taskIndex = Integer.parseInt(taskNumber) - 1;
+        int taskIndex;
         int maxTask = Task.getNumberOfTasks();
+        try {
+            taskIndex = Integer.parseInt(taskNumber) - 1;
+        } catch (NumberFormatException nfe) {
+            System.out.println("\tError Encountered - invalid input!");
+            return;
+        }
+
 
         if(taskIndex < 0 || taskIndex >= maxTask) {
             throw new RangeExceedException();
