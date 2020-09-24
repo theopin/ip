@@ -19,7 +19,7 @@ public class UserSession {
     /**
      * Runs the program based on a given sequence.
      */
-    public void runProgramSequence() {
+    private void runProgramSequence() {
         String action;
         CommandParser newUserCommand;
         Message.printWelcomeText();

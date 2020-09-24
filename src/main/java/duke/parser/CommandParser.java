@@ -35,7 +35,7 @@ public class CommandParser {
     /**
      * Takes in a command given by the user.
      */
-    public void requestUserInput()  {
+    private void requestUserInput()  {
         String[] userInput;
         try {
             userInput = receiveUserInput();
@@ -57,7 +57,7 @@ public class CommandParser {
      *                                 predefined action.
      * @throws PartialCommandException Thrown if the user command is incomplete.
      */
-    public String[] receiveUserInput() throws IllegalCommandException, PartialCommandException {
+    private String[] receiveUserInput() throws IllegalCommandException, PartialCommandException {
         String userCommand = myScanner.nextLine().trim();
         Message.printHorizontalLine();
         String[] splitCommand = userCommand.split(WHITESPACE);

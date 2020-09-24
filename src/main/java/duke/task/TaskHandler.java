@@ -298,7 +298,7 @@ public class TaskHandler {
      * @throws PartialCommandException Thrown if certain parameters of the feature
      *                                 requested are missing.
      */
-    public static boolean analyseParameters(String action, String newTaskDate, String newTaskTime,
+    private static boolean analyseParameters(String action, String newTaskDate, String newTaskTime,
                                             boolean isNewlyCreated) throws PartialCommandException {
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
             boolean canCreateTask;
@@ -321,7 +321,7 @@ public class TaskHandler {
      * @param isNewlyCreated Checks if the task was created within the current
      *                        user session.
      */
-    public static boolean parseGivenParameters(String newTaskDate, String newTaskTime, boolean isNewlyCreated) {
+    private static boolean parseGivenParameters(String newTaskDate, String newTaskTime, boolean isNewlyCreated) {
         boolean canParseDate = true, canParseTime = true;
 
         try {

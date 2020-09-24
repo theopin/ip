@@ -106,8 +106,7 @@ public class WriteDataFile extends DataFile {
             textBuild.append(0);
         }
     }
-
-
+    
     /**
      * Appends the time of the task into the stringBuilder.
      *
