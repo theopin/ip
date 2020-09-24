@@ -93,7 +93,7 @@ public class ReadDataFile extends DataFile {
         }
 
         try {
-            TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime);
+            TaskHandler.insertNewTask(action, newTaskDescription, newTaskDate, newTaskTime, false);
         } catch (PartialCommandException e) {
             e.alertException();
         }

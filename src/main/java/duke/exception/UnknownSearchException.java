@@ -8,6 +8,6 @@ public class UnknownSearchException extends DukeException {
 
     @Override
     public void alertException() {
-        System.out.println("\tTask requested does not exist! Please try again!");
+        System.out.println("\tError Code 3: Search parameters do not match any task!");
     }
 }

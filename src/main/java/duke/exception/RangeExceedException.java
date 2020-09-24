@@ -8,6 +8,6 @@ public class RangeExceedException extends DukeException {
 
     @Override
     public void alertException() {
-        System.out.println("\tTask specified does not exist! Please try again!");
+        System.out.println("\t Error Code 2: Task number specified does not exist!");
     }
 }

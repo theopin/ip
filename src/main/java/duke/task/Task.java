@@ -1,8 +1,9 @@
 package duke.task;
 
+import duke.exception.InvalidTimeException;
+
 import static duke.parser.DateTimeParser.parseDate;
 import static duke.parser.DateTimeParser.parseTime;
-import static duke.task.TaskHandler.EMPTY;
 import static duke.task.TaskHandler.WHITESPACE;
 
 /**
@@ -10,6 +11,7 @@ import static duke.task.TaskHandler.WHITESPACE;
  * used by its subclasses.
  */
 public class Task {
+    private static final String END_OF_DAY = "11:59 PM";
     protected String description;
     protected boolean isDone = false;
     protected static int numberOfTasks = 0;
@@ -50,16 +52,28 @@ public class Task {
      * Converts the Task into a string.
      */
     public static String modifyString(StringBuilder summary, String dueDate, String dueTime) {
-        if(!dueDate.equals(EMPTY)) {
-            summary.append(parseDate(dueDate));
-            if(!dueTime.equals(EMPTY)) {
-                summary.append(WHITESPACE).append(parseTime(dueTime));
-            }
-        } else if(!dueTime.equals(EMPTY)) {
-            summary.append(parseTime(dueTime));
-        }
-        summary.append(")");
+        String parsedDate, parsedTime;
+        boolean isDateParsed = true, isTimeParsed = true;
 
+
+        try {
+            parsedDate = parseDate(dueDate);
+            summary.append(parsedDate);
+        } catch (InvalidTimeException e) {
+            isDateParsed = false;
+        }
+
+        try {
+            if(isDateParsed) {
+                summary.append(WHITESPACE);
+            }
+            parsedTime = parseTime(dueTime);
+            summary.append(parsedTime);
+        } catch (InvalidTimeException e) {
+            summary.append(END_OF_DAY);
+        }
+
+        summary.append(")");
         return summary.toString();
     }
 

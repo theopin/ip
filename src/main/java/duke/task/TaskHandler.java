@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.data.WriteDataFile;
+import duke.exception.InvalidTimeException;
 import duke.exception.PartialCommandException;
 import duke.exception.RangeExceedException;
 import duke.exception.UnknownSearchException;
@@ -225,7 +226,7 @@ public class TaskHandler {
 
         // Creates a new task type based on the type specified
         try {
-            insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime);
+            insertNewTask(action, newTask.toString().trim(), newTaskDate, newTaskTime, true);
             // Inform user of success operation
             Message.modifyTaskSuccess(
                     tasks.get(newIndex).toString(), true);
@@ -245,21 +246,14 @@ public class TaskHandler {
      * @param newTaskDate Date of the task.
      * @param newTaskTime Time of the task.
      */
-    public static void insertNewTask(String action, String newTask, String newTaskDate, String newTaskTime) throws PartialCommandException {
+    public static void insertNewTask(String action, String newTask, String newTaskDate,
+                                     String newTaskTime, boolean isNewlyCreated) throws PartialCommandException {
         if(newTask.equals(EMPTY)) {
-            throw new PartialCommandException(action + " - task");
+            throw new PartialCommandException("description");
         }
 
-        if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
-            if (newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
-                throw new PartialCommandException(action + " - date and time");
-            } else {
-                String parsedTaskDate = parseDate(newTaskDate);
-                String parsedTaskTime = parseTime(newTaskTime);
-                if (parsedTaskDate.equals(EMPTY) && parsedTaskTime.equals(EMPTY)) {
-                    throw new PartialCommandException(action + " - date and time");
-                }
-            }
+        if (analyseParameters(action, newTaskDate, newTaskTime, isNewlyCreated)) {
+            return;
         }
 
         switch (action) {
@@ -275,6 +269,42 @@ public class TaskHandler {
         default:
             break;
         }
+    }
+
+    public static boolean analyseParameters(String action, String newTaskDate, String newTaskTime,
+                                            boolean isNewlyCreated) throws PartialCommandException {
+        if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
+            boolean canCreateTask;
+            if (newTaskDate.equals(EMPTY) && newTaskTime.equals(EMPTY)) {
+                throw new PartialCommandException("date and time");
+            } else {
+                canCreateTask = parseGivenParameters(newTaskDate, newTaskTime, isNewlyCreated);
+                return !canCreateTask;
+            }
+        }
+        return false;
+    }
+
+    public static boolean parseGivenParameters(String newTaskDate, String newTaskTime, boolean isNewlyCreated) {
+        boolean canParseDate = true, canParseTime = true;
+
+        try {
+            parseDate(newTaskDate);
+        } catch (InvalidTimeException e) {
+            if(isNewlyCreated) {
+                e.alertException();
+            }
+            canParseDate = false;
+        }
+        try {
+            parseTime(newTaskTime);
+        } catch (InvalidTimeException s) {
+            if(isNewlyCreated) {
+                s.alertException();
+            }
+            canParseTime = false;
+        }
+        return (canParseDate || canParseTime);
     }
 }
 
