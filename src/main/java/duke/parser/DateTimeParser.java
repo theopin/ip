@@ -4,9 +4,14 @@ import duke.exception.InvalidTimeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that contains methods to parse dates and times given
+ * by the user's command.
+ */
 public class DateTimeParser {
 
     public static final String TIME = "time";

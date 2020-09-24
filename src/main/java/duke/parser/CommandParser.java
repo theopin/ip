@@ -2,7 +2,9 @@ package duke.parser;
 
 import duke.exception.IllegalCommandException;
 import duke.exception.PartialCommandException;
+
 import duke.message.Message;
+
 import duke.task.TaskHandler;
 
 import java.util.Arrays;
@@ -11,7 +13,9 @@ import java.util.Scanner;
 
 import static duke.task.TaskHandler.*;
 
-
+/**
+ * Class that handles a command given by the user
+ */
 public class CommandParser {
     // Scanner for user input
     private static final Scanner myScanner = new Scanner(System.in);

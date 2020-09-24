@@ -4,6 +4,7 @@ import duke.exception.InvalidTimeException;
 
 import static duke.parser.DateTimeParser.parseDate;
 import static duke.parser.DateTimeParser.parseTime;
+
 import static duke.task.TaskHandler.WHITESPACE;
 
 /**
@@ -47,14 +48,16 @@ public class Task {
         numberOfTasks--;
     }
 
-    
     /**
      * Converts the Task into a string.
+     *
+     * @param summary StringBuilder that builds the string equivalent of the task.
+     * @param dueDate Date that the task is set at.
+     * @param dueTime Time that the task is set at.
      */
     public static String modifyString(StringBuilder summary, String dueDate, String dueTime) {
         String parsedDate, parsedTime;
-        boolean isDateParsed = true, isTimeParsed = true;
-
+        boolean isDateParsed = true;
 
         try {
             parsedDate = parseDate(dueDate);

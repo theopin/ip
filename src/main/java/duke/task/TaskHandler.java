@@ -168,7 +168,12 @@ public class TaskHandler {
             System.out.println("\t" + task.toString());
         }
     }
-  
+
+    /**
+     * Extracts the search filter the user is using to find relevant tasks.
+     *
+     * @param userInput  Command that the user has sent.
+     */
     private String extractSearchFilter(String[] userInput) {
         StringBuilder searchFilter = new StringBuilder();
         int userInputLength = userInput.length;
@@ -184,6 +189,12 @@ public class TaskHandler {
         return searchFilter.toString();
     }
 
+    /**
+     * Extracts the search filter the user is using to find relevant tasks.
+     *
+     * @param userFilterInput  Filter used to find relevant tasks.
+     * @throws UnknownSearchException Thrown if the filter does not match any task.
+     */
     private void findMatchingTasks(String userFilterInput) throws UnknownSearchException {
         ArrayList<Task> filteredTasks;
         filteredTasks = (ArrayList<Task>) tasks.stream()
@@ -245,6 +256,10 @@ public class TaskHandler {
      * @param newTask Description of the task.
      * @param newTaskDate Date of the task.
      * @param newTaskTime Time of the task.
+     * @param isNewlyCreated Checks if the task was created within the current
+     *                        user session.
+     * @throws PartialCommandException Thrown if certain parameters of the feature
+     *                                 requested are missing.
      */
     public static void insertNewTask(String action, String newTask, String newTaskDate,
                                      String newTaskTime, boolean isNewlyCreated) throws PartialCommandException {
@@ -271,6 +286,18 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Analyses the parameters given and returns a boolean indicating whether a task can
+     * be created with such input parameters.
+     *
+     * @param action Name of the particular task that the user wishes to executes.
+     * @param newTaskDate Date of the task.
+     * @param newTaskTime Time of the task.
+     * @param isNewlyCreated Checks if the task was created within the current
+     *                        user session.
+     * @throws PartialCommandException Thrown if certain parameters of the feature
+     *                                 requested are missing.
+     */
     public static boolean analyseParameters(String action, String newTaskDate, String newTaskTime,
                                             boolean isNewlyCreated) throws PartialCommandException {
         if(action.equals(ACTION_DEADLINE) || action.equals(ACTION_EVENT)) {
@@ -285,6 +312,15 @@ public class TaskHandler {
         return false;
     }
 
+    /**
+     * Analyses the parameters given and returns a boolean indicating whether a task can
+     * be created with such input parameters.
+     *
+     * @param newTaskDate Date of the task.
+     * @param newTaskTime Time of the task.
+     * @param isNewlyCreated Checks if the task was created within the current
+     *                        user session.
+     */
     public static boolean parseGivenParameters(String newTaskDate, String newTaskTime, boolean isNewlyCreated) {
         boolean canParseDate = true, canParseTime = true;
 
@@ -296,6 +332,7 @@ public class TaskHandler {
             }
             canParseDate = false;
         }
+
         try {
             parseTime(newTaskTime);
         } catch (InvalidTimeException s) {

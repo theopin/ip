@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.message.Message;
-
 /**
  * Error exception that arises when some essential parameters
  * are not indicated in the user input.
