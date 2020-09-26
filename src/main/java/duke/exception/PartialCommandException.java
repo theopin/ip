@@ -15,7 +15,7 @@ public class PartialCommandException extends DukeException {
     }
 
     /**
-     * Informs user of the incomplete command
+     * Informs user of the incomplete command.
      */
     @Override
     public void alertException() {

@@ -13,6 +13,9 @@ public abstract class DataFile {
     protected static final Path DATA_DIR =  Paths.get(USER_DIR, "data");
     protected static final Path TXT_FILE_DIR =  Paths.get(USER_DIR, "data", "duke.txt");
 
+    /**
+     * A method that is to be run when its subclass is created.
+     */
     public abstract void executeFunction();
 
 }

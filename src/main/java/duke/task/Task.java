@@ -80,6 +80,9 @@ public class Task {
         return summary.toString();
     }
 
+    /**
+     * Converts the Task into a string.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();

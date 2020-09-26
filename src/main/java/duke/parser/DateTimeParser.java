@@ -14,18 +14,21 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeParser {
 
-    public static final String TIME = "time";
-    public static final String DATE = "date";
+    private static final String TIME = "time";
+    private static final String DATE = "date";
 
-    public static final String MONTH_DAY_YEAR_FORMAT = "MMM dd yyyy";
-    public static final String DAY_MONTH_YEAR_FORMAT = "dd/MM/yyyy";
-    public static final String X_AM_PM_FORMAT = "h:mm a";
+    private static final String MONTH_DAY_YEAR_FORMAT = "MMM dd yyyy";
+    private static final String DAY_MONTH_YEAR_FORMAT = "dd/MM/yyyy";
+    private static final String X_AM_PM_FORMAT = "h:mm a";
 
     /**
      * Parses the date given by the user in the form (Day/Month/Year) and
      * returns it in another format (Month Day Year).
      *
      * @param givenDateFormat A String containing the date given by the user.
+     * @return a string of the date in the new format.
+     * @throws InvalidTimeException Thrown when the date entered does not match
+     *                              the given format.
      */
     public static String parseDate(String givenDateFormat) throws InvalidTimeException {
         String newDateFormat;
@@ -46,6 +49,9 @@ public class DateTimeParser {
      * returns it in another format (H:MM AM) or (H:MM PM).
      *
      * @param givenTimeFormat A String containing the time given by the user.
+     * @return a string of the time in the new format.
+     * @throws InvalidTimeException Thrown when the date entered does not match
+     *                              the given format.
      */
     public static String parseTime(String givenTimeFormat) throws InvalidTimeException {
         String newTimeFormat;

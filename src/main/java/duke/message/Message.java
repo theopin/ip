@@ -50,7 +50,6 @@ public class Message {
         System.out.println("\t" + taskName);
     }
 
-
     /**
      * Informs user of success in modifying a task's presence in the list.
      *
@@ -75,6 +74,13 @@ public class Message {
         System.out.println("\tNow you have "+ maxTask  + " tasks in the list.");
     }
 
+    /**
+     * Prints all the tasks whose description matches the search filter given
+     * by the user.
+     *
+     * @param filteredTasks Array of tasks that match search filter.
+     * @param searchFilter Filter used to find relevant tasks from current list.
+     */
     public static void printMatchingTasks(ArrayList<Task> filteredTasks, String searchFilter) {
         int taskCount = 1;
         System.out.println("\tHere are the tasks that match this command - "+ searchFilter + " :");
@@ -84,6 +90,9 @@ public class Message {
         }
     }
 
+    /**
+     * Informs the user that all the tasks in the task list has been cleared.
+     */
     public static void clearTaskListSuccess() {
         System.out.println("\t" + "Got it. I've cleared all tasks in the list!");
         System.out.println("\tNow you have no tasks in the list.");

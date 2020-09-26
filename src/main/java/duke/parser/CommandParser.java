@@ -6,12 +6,10 @@ import duke.exception.PartialCommandException;
 import duke.message.Message;
 
 import duke.task.TaskHandler;
+import static duke.task.TaskHandler.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
-
-import static duke.task.TaskHandler.*;
 
 /**
  * Class that handles a command given by the user
@@ -19,8 +17,6 @@ import static duke.task.TaskHandler.*;
 public class CommandParser {
     // Scanner for user input
     private static final Scanner myScanner = new Scanner(System.in);
-
-    public static final String WHITESPACE = " ";
 
     private static final String[] taskTypes = {ACTION_TODO, ACTION_EVENT, ACTION_DEADLINE};
     private static final String[] taskRelatedCommand = {ACTION_DONE, ACTION_REMOVE, ACTION_FIND};

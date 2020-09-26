@@ -295,6 +295,7 @@ public class TaskHandler {
      * @param newTaskTime Time of the task.
      * @param isNewlyCreated Checks if the task was created within the current
      *                        user session.
+     * @return a boolean indicating if a task can be created with the given parameters.
      * @throws PartialCommandException Thrown if certain parameters of the feature
      *                                 requested are missing.
      */
@@ -320,6 +321,7 @@ public class TaskHandler {
      * @param newTaskTime Time of the task.
      * @param isNewlyCreated Checks if the task was created within the current
      *                        user session.
+     * @return a boolean indicating if the date or time can be parsed.
      */
     private static boolean parseGivenParameters(String newTaskDate, String newTaskTime, boolean isNewlyCreated) {
         boolean canParseDate = true, canParseTime = true;

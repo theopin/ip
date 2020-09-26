@@ -6,6 +6,9 @@ package duke.exception;
  */
 public class RangeExceedException extends DukeException {
 
+    /**
+     * Informs user that the task number requested does not exist in the list.
+     */
     @Override
     public void alertException() {
         System.out.println("\t Error Code 2: Task number specified does not exist!");

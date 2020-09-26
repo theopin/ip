@@ -17,6 +17,7 @@ import java.io.FileWriter;
 public class WriteDataFile extends DataFile {
     protected String textContent;
 
+    // WriteDataFile Constructor
     public WriteDataFile() {
         executeFunction();
     }
