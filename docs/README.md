@@ -1,4 +1,18 @@
 # User Guide
+**Duke** is a Command Line Interface Application to provide users with a method to manage
+their busy schedules. 
+It has a text based interface.
+
+
+
+## Table of Contents
+* Quick Start
+* Features
+* FAQ
+  * List
+* Command Summary
+
+## Quick Start 
 
 ## Features 
 
@@ -18,3 +32,7 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+
+## FAQ
+
+## Command Summary
