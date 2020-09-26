@@ -47,9 +47,9 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Here are the tasks in your list:
-	[T][✘] MA1508E Assignment
-	[D][✘] Cook pizza (by: 4:00 PM)
-	[E][✘] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
+	[T][X] MA1508E Assignment
+	[D][X] Cook pizza (by: 4:00 PM)
+	[E][X] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
 	____________________________________________________________
 ```
 
@@ -69,7 +69,7 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Here are the tasks that match this command - MA1508E:
-	1. [T][✘] MA1508E Assignment
+	1. [T][X] MA1508E Assignment
 	____________________________________________________________
 ```
 
@@ -92,7 +92,7 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Got it. I've added this task: 
-		[T][✘] MA1508E assignment
+		[T][X] MA1508E assignment
 	Now you have 1 tasks in the list.
 	____________________________________________________________
 
@@ -111,7 +111,7 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Got it. I've added this task: 
-		[E][✘] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
+		[E][X] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
 	Now you have 1 tasks in the list.
 	____________________________________________________________
 
@@ -130,7 +130,7 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Got it. I've added this task: 
-		[D][✘] Cook pizza (by: 4:00 PM)
+		[D][X] Cook pizza (by: 4:00 PM)
 	Now you have 1 tasks in the list.
 	____________________________________________________________
 
@@ -153,7 +153,7 @@ Expected Outcome (Single `Task`):
 ```
 	____________________________________________________________
 	Got it. I've removed this task: 
-		[T][✘] MA1508E Assignment
+		[T][X] MA1508E Assignment
 	Now you have 2 tasks in the list.
 	____________________________________________________________
 ```
@@ -181,7 +181,7 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Nice! I've marked this task as done:
-	[T][✓] MA1508E assignment
+	[T][/] MA1508E assignment
 	____________________________________________________________
 
 ```

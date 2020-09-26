@@ -30,7 +30,7 @@ public class Task {
 
     // Returns tick or X symbols based on the value of isDone
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "X" : "/");
     }
 
     // Sets the isDone variable of the task
