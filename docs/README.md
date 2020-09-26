@@ -47,9 +47,9 @@ Expected Outcome:
 ```
 	____________________________________________________________
 	Here are the tasks in your list:
-	[T][X] MA1508E Assignment
-	[D][X] Cook pizza (by: 4:00 PM)
-	[E][X] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
+	1. [T][X] MA1508E Assignment
+	2. [D][X] Cook pizza (by: 4:00 PM)
+	3. [E][X] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
 	____________________________________________________________
 ```
 
