@@ -164,8 +164,10 @@ public class TaskHandler {
         System.out.println("\tHere are the tasks in your list:");
 
         // Print each task based on a specified format
+        int taskIndex = 1;
         for (Task task: tasks) {
-            System.out.println("\t" + task.toString());
+            System.out.println("\t"+ taskIndex + ". " + task.toString());
+            taskIndex++;
         }
     }
 
