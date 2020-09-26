@@ -3,18 +3,17 @@
 their busy schedules by tracking their important tasks.
 
 ## Table of Contents
-* [Quick Start](#quick-start)
+* [Quick Start](#Quick Start)
 * [Features](#Features)
-  * List 
-  * Find `Task`
-  * Add `Task`
-  * Remove` Task`
-  * Mark `Task` as Done
-  * Exit
-  * Save
-* Troubleshooting
-* FAQ
-* Command Summary
+  * [List](#List)
+  * [Find `Task`](#Find Task) 
+  * [Add `Task`](#Add-`Task`)
+  * [Remove `Task`](#Remove `Task`)
+  * [Mark `Task` as Done] (#Mark `Task` as Done)
+  * [Exit](#Exit)
+  * [Save](#Save)
+* [FAQ](#FAQ)
+* [Command Summary](#Command Summary)
 
 ## Quick Start 
 1. Ensure you have Java `11` or above installed in your Computer.
