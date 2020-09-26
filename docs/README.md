@@ -37,7 +37,7 @@ their busy schedules by tracking their important tasks.
 ## Features 
 
 ### List
-Presents all the tasks present in the task manager as a list.
+Presents all the tasks present in the task manager.
 
 #### Usage
 
@@ -61,8 +61,9 @@ by the user.
 
 Format: `find KEYWORD`
 
-Example of usage:
+Examples of usage:
 * `find MA1508E`
+* `find assignment`
 
 Expected Outcome:
 ```
@@ -75,22 +76,65 @@ Expected Outcome:
 ### Add `Task`
 Adds a task to the task manager. 
 Duke currently supports 3 types of tasks.
-* Todo
-* Event
-* Deadline
+* `todo`
+* `event`
+* `deadline`
 
-#### Usage
+#### Usage of `todo`
 
-Format: `bye`
+Format: `todo DESCRIPTION`
+
+Examples of usage:
+* `todo MA1508E assignment`
+* `todo maths`
 
 Expected Outcome:
 ```
 	____________________________________________________________
-	Bye. Hope to see you again soon!
+	Got it. I've added this task: 
+		[T][✘] MA1508E assignment
+	Now you have 1 tasks in the list.
 	____________________________________________________________
 
 ```
 
+#### Usage of `event`
+
+Format: `event DESCRIPTION /at DATE TIME`
+
+Examples of usage:
+* `event GER1000 Quiz /by 04/10/2020 23:59`
+* `event math quiz /by 24/10/2020`
+* `event Physics quiz /by 17:00`
+
+Expected Outcome:
+```
+	____________________________________________________________
+	Got it. I've added this task: 
+		[E][✘] GER1000 Quiz (at: Oct 04 2020 11:59 PM)
+	Now you have 1 tasks in the list.
+	____________________________________________________________
+
+```
+
+#### Usage of `deadline`
+
+Format: `deadline DESCRIPTION /by DATE TIME`
+
+Examples of usage:
+* `deadline Learn pizza-making /by 24/10/2020 17:00`
+* `deadline math quiz /by 24/10/2020`
+* `deadline IPPT /by 17:00`
+
+Expected Outcome:
+```
+	____________________________________________________________
+	Got it. I've added this task: 
+		[D][✘] Cook pizza (by: 4:00 PM)
+	Now you have 1 tasks in the list.
+	____________________________________________________________
+
+```
 ### Remove `Task`
 Removes a `Task` from the task manager. You can choose to remove one task at 
 a time or all the tasks at the same time.
@@ -101,7 +145,7 @@ Format:
 * Single `Task`: `remove INDEX`
 * Every `Task`: `remove all`
 
-Example of usage:
+Examples of usage:
 * `remove 1`
 * `remove all`
 
@@ -129,8 +173,9 @@ Marks a particular `Task` in the task manager as done.
 
 Format: `done INDEX`
 
-Example of usage:
+Examples of usage:
 * `done 1`
+* `done 3`
 
 Expected Outcome:
 ```
@@ -165,3 +210,14 @@ after any command that changes it is given.
 ### Q: 
 
 ## Command Summary
+
+Action | Format | Examples
+-------- | ---------- | ------------
+List | `list` | -
+Find `Task` | `done KEYWORD` | `find MA1508E` `find quiz`
+Add `Task` - `todo` | `todo DESCRIPTION` | `todo MA1508E assignment` `todo maths`
+Add `Task` - `event` | `event DESCRIPTION /at DATE TIME` | `event GER1000 Quiz /by 04/10/2020 23:59` `event math quiz /by 24/10/2020` `event Physics quiz /by 17:00`
+Add `Task` - `deadline` | `deadline DESCRIPTION /by DATE TIME` | `deadline Learn pizza-making /by 24/10/2020 17:00` `deadline math quiz /by 24/10/2020`s `deadline IPPT /by 17:00`
+Remove `Task` | `remove INDEX` `remove all` | `remove 1` `remove 2`
+Mark `Task` as done | `done INDEX` | `done 1` `done 3`
+Exit | `bye` | -
