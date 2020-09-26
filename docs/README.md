@@ -3,8 +3,8 @@
 their busy schedules by tracking their important tasks.
 
 ## Table of Contents
-* Quick Start
-* Features
+* [Quick Start](#quick-start)
+* [Features](#Features)
   * List 
   * Find `Task`
   * Add `Task`
@@ -207,7 +207,9 @@ after any command that changes it is given.
 
 ## FAQ
 
-### Q: 
+### Q: How do I transfer my data to another computer?
+Transfer the folder /data containing duke.jar into the directory of your other computer that contains ip.jar. 
+The application will look out for duke.txt within that /data folder and fetch the tasks from there.
 
 ## Command Summary
 
