@@ -31,7 +31,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         StringBuilder eventSummary = new StringBuilder();
-        eventSummary.append("[E]").append(super.toString()).append(" (by: ");
+        eventSummary.append("[E]").append(super.toString()).append(" (at: ");
         return modifyString(eventSummary, allocatedDate, allocatedTime);
     }
 }

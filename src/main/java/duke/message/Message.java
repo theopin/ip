@@ -83,7 +83,7 @@ public class Message {
      */
     public static void printMatchingTasks(ArrayList<Task> filteredTasks, String searchFilter) {
         int taskCount = 1;
-        System.out.println("\tHere are the tasks that match this command - "+ searchFilter + " :");
+        System.out.println("\tHere are the tasks that match this command - "+ searchFilter + ":");
         for (Task filteredTask: filteredTasks){
             System.out.println("\t" + taskCount + ". "+ filteredTask.toString());
             taskCount++;
