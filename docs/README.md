@@ -3,17 +3,17 @@
 their busy schedules by tracking their important tasks.
 
 ## Table of Contents
-* [Quick Start](#Quick Start)
-* [Features](#Features)
-  * [List](#List)
-  * [Find `Task`](#Find Task) 
-  * [Add `Task`](#Add-`Task`)
-  * [Remove `Task`](#Remove `Task`)
-  * [Mark `Task` as Done] (#Mark `Task` as Done)
-  * [Exit](#Exit)
-  * [Save](#Save)
-* [FAQ](#FAQ)
-* [Command Summary](#Command Summary)
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [List](#list)
+  * [Find `Task`](#find-task) 
+  * [Add `Task`](#add-task)
+  * [Remove `Task`](#remove-task)
+  * [Mark Completed `Task` as Done](#mark-task-as-done)
+  * [Exit](#exit)
+  * [Save](#save)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -165,7 +165,7 @@ Expected Outcome (Every `Task`):
 	____________________________________________________________
 ```
 
-### Mark `Task` as Done
+### Mark `Task` as Done 
 Marks a particular `Task` in the task manager as done. 
 
 #### Usage
