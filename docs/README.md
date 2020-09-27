@@ -79,6 +79,11 @@ Duke currently supports 3 types of tasks.
 * `event`
 * `deadline`
 
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
+
 #### Usage of `todo`
 
 Format: `todo DESCRIPTION`
