@@ -21,10 +21,20 @@ public class Deadline extends Task {
         this.dueTime = dueTime;
     }
 
+    /**
+     * Returns the due date of the particular Deadline task
+     *
+     * @return A date that the Deadline task is due by.
+     */
     public String getDueDate() {
         return dueDate;
     }
 
+    /**
+     * Returns the due time of the particular Deadline task
+     *
+     * @return A time that the Deadline task is due by.
+     */
     public String getDueTime() {
         return dueTime;
     }

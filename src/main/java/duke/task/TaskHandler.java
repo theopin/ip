@@ -142,6 +142,7 @@ public class TaskHandler {
         int maxTask = Task.getNumberOfTasks();
         try {
             taskIndex = Integer.parseInt(taskNumber) - 1;
+            new WriteDataFile();
         } catch (NumberFormatException nfe) {
             System.out.println("\tError Encountered - invalid input!");
             return;

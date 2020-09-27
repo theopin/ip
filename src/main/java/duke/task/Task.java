@@ -27,27 +27,46 @@ public class Task {
         numberOfTasks++;
     }
 
-    // Returns description of tasks
+    /**
+     * Obtains the description of the task.
+     *
+     * @return isDone A string containing the description of the task.
+     */
     public String getDescription() {
         return description;
     }
 
-    // Returns tick or X symbols based on the value of isDone
+
+    /**
+     * Returns a symbol indicating the status of completion of the task.
+     *
+     * @return isDone A Symbol that indicates if the task is done or not.
+     */
     public String getStatusIcon() {
-        return (isDone ? "X" : "/");
+        return (isDone ? "/" : "X");
     }
 
-    // Sets the isDone variable of the task
+    /**
+     * Sets the completion status of the task.
+     *
+     * @param isDone A boolean indicating if the task is done.
+     */
     public void markAsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
-    // Returns the number of Tasks created so far
+    /**
+     * Returns the number of tasks in the taskList.
+     *
+     * @return An integer containing the number of tasks in the taskList.
+     */
     public static int getNumberOfTasks() {
         return numberOfTasks;
     }
 
-    // Updates the number of tasks once a task has been removed
+    /**
+     * Updates the number of tasks in the taskList when a task is removed.
+     */
     public static void updateTaskCount() {
         numberOfTasks--;
     }

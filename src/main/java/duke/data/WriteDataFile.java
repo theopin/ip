@@ -101,7 +101,7 @@ public class WriteDataFile extends DataFile {
      *
      */
     private void extractIsDone(StringBuilder textBuild, Task task) {
-        if(task.getStatusIcon().equals("\u2713")) {
+        if(task.getStatusIcon().equals("/")) {
             textBuild.append(1);
         } else {
             textBuild.append(0);

@@ -21,10 +21,20 @@ public class Event extends Task {
         this.allocatedTime = allocatedTime;
     }
 
+    /**
+     * Returns the date of the particular Event task
+     *
+     * @return A date that the Event task is happening at.
+     */
     public String getAllocatedTime() {
         return allocatedTime;
     }
 
+    /**
+     * Returns the time of the particular Event task
+     *
+     * @return A time that the Event task is happening at.
+     */
     public String getAllocatedDate() {
         return allocatedDate;
     }
