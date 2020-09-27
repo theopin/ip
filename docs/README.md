@@ -79,10 +79,13 @@ Duke currently supports 3 types of tasks.
 * `event`
 * `deadline`
 
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about the command format:**<br>
+
+* Words in UPPER_CASE are the parameters to be supplied by the user.
+  e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
+
+</div>
 
 #### Usage of `todo`
 
@@ -212,8 +215,8 @@ after any command that changes it is given.
 ## FAQ
 
 ### Q: How do I transfer my data to another computer?
-Transfer the folder /data containing duke.jar into the directory of your other computer that contains ip.jar. 
-The application will look out for duke.txt within that /data folder and fetch the tasks from there.
+Transfer the folder /data containing duke.txt into the directory of your other computer that contains ip.jar. 
+The application will look out for the duke.txt within that /data folder and fetch the tasks from there.
 
 ## Command Summary
 
