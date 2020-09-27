@@ -35,6 +35,22 @@ their busy schedules by tracking their important tasks.
 ```
 ## Features 
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as 
+  `todo maths quiz`.
+* If a feature requires you to indicate a `DATE` or `TIME`, they
+  must be typed in the format specified below. Duke is unable to process
+  other `DATE` or `TIME` formats.
+  
+  * `DATE`: DD/MM/YYYY
+  * `TIME`: HH:MM
+
+</div>
+
 ### List
 Presents all the tasks present in the task manager.
 
@@ -79,14 +95,6 @@ Duke currently supports 3 types of tasks.
 * `event`
 * `deadline`
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Notes about the command format:**<br>
-
-* Words in UPPER_CASE are the parameters to be supplied by the user.
-  e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
-
-</div>
-
 #### Usage of `todo`
 
 Format: `todo DESCRIPTION`
@@ -109,6 +117,9 @@ Expected Outcome:
 
 Format: `event DESCRIPTION /at DATE TIME`
 
+| :information_source: | `event` requires at least a `DATE` or `TIME` to be stored in the task manager. |
+|----------------------|:-------------------------------------|
+
 Examples of usage:
 * `event GER1000 Quiz /by 04/10/2020 23:59`
 * `event math quiz /by 24/10/2020`
@@ -127,6 +138,9 @@ Expected Outcome:
 #### Usage of `deadline`
 
 Format: `deadline DESCRIPTION /by DATE TIME`
+
+| :information_source: | `deadline` requires at least a `DATE` or `TIME` to be stored in the task manager. |
+|----------------------|:-------------------------------------|
 
 Examples of usage:
 * `deadline Learn pizza-making /by 24/10/2020 17:00`
