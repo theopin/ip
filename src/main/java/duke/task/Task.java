@@ -17,7 +17,11 @@ public class Task {
     protected boolean isDone = false;
     protected static int numberOfTasks = 0;
 
-    // Task Constructor
+    /**
+     * Constructs a new Task Object.
+     *
+     * @param description Details of the Task.
+     */
     public Task(String description) {
         this.description = description;
         numberOfTasks++;

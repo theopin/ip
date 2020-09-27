@@ -71,10 +71,20 @@ public class CommandParser {
         return splitCommand;
     }
 
+    /**
+     * Sets the action that is going to be taken by the task manager
+     *
+     * @param actionCommand A string that describes the feature that will be used.
+     */
     public void setActionCommand(String actionCommand) {
         this.actionCommand = actionCommand;
     }
 
+    /**
+     * Gets the action that is going to be taken by the task manager
+     *
+     * @return A string that describes the feature that will be used.
+     */
     public String getActionCommand() {
         return actionCommand;
     }

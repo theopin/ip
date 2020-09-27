@@ -10,8 +10,11 @@ public class Deadline extends Task {
     protected String dueTime;
 
 
-    // Deadline Constructor
-
+    /**
+     * Constructs a new Deadline Object.
+     *
+     * @param description Details of the Deadline task.
+     */
     public Deadline(String description, String dueDate, String dueTime) {
         super(description);
         this.dueDate = dueDate;
@@ -28,6 +31,8 @@ public class Deadline extends Task {
 
     /**
      * Converts the Deadline Task into a string.
+     *
+     * @return a string that contains information of the deadline task.
      */
     @Override
     public String toString() {

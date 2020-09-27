@@ -6,13 +6,19 @@ package duke.task;
  */
 public class Todo extends Task {
 
-    // Todo Constructor
+    /**
+     * Constructs a new Todo Object.
+     *
+     * @param description Details of the todo task.
+     */
     public Todo(String description) {
         super(description);
     }
 
     /**
      * Converts the Todo Task into a string.
+     *
+     * @return a string that contains information of the todo task.
      */
     @Override
     public String toString() {

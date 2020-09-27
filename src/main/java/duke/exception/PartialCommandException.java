@@ -9,6 +9,11 @@ public class PartialCommandException extends DukeException {
 
     private final String faultyAction;
 
+    /**
+     * Constructs a new PartialCommandException Object.
+     *
+     * @param faultyAction Action that has incomplete parameters given by user.
+     */
     public PartialCommandException(String faultyAction) {
         super();
         this.faultyAction = faultyAction;

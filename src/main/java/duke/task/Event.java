@@ -10,7 +10,11 @@ public class Event extends Task {
     protected String allocatedTime;
 
 
-    // Event Constructor
+    /**
+     * Constructs a new Event Object.
+     *
+     * @param description Details of the Event task.
+     */
     public Event(String description, String allocatedDate, String allocatedTime) {
         super(description);
         this.allocatedDate = allocatedDate;
@@ -27,6 +31,8 @@ public class Event extends Task {
 
     /**
      * Converts the Event Task into a string.
+     *
+     * @return a string that contains information of the event task.
      */
     @Override
     public String toString() {

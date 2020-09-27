@@ -8,7 +8,11 @@ public class InvalidTimeException extends DukeException{
 
     private final String faultySegment;
 
-    // InvalidTimeException Constructor
+    /**
+     * Constructs a new InvalidTimeException Object.
+     *
+     * @param faultySegment Parameter of the action that has invalid input.
+     */
     public InvalidTimeException(String faultySegment) {
         super();
         this.faultySegment = faultySegment;
