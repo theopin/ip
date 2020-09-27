@@ -1,5 +1,5 @@
 # User Guide
-**Duke** is a Command Line Interface (CLI) application that helps users to manage
+**Duke**  is a Command Line Interface (CLI) application that helps users to manage
 their busy schedules by tracking their important tasks.
 
 ## Table of Contents
@@ -43,7 +43,7 @@ their busy schedules by tracking their important tasks.
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as 
   `todo maths quiz`.
 * If a feature requires you to indicate a `DATE` or `TIME`, they
-  must be typed in the format specified below. Duke is unable to process
+  must be typed in the format specified below. **Duke**  is unable to process
   other `DATE` and `TIME` formats.
   
   * `DATE`: `DD/MM/YYYY`
@@ -95,7 +95,7 @@ Expected Outcome:
 
 ### Add `Task`
 Adds a task to the task manager. 
-Duke currently supports 3 types of tasks.
+**Duke**  currently supports 3 types of tasks.
 * `todo`
 * `event`
 * `deadline`
@@ -229,13 +229,13 @@ Expected Outcome:
 
 ### Save
 Data related to this application is saved in the hard disk **automatically** 
-after any command that changes it is given. 
+after any command that changes it is given. There is no need to save manually.
 
 ## FAQ
 
 ### Q: How do I transfer my data to another computer?
-Transfer the folder /data containing duke.txt into the directory of your other computer that contains ip.jar. 
-The application will look out for the duke.txt within that /data folder and fetch the tasks from there.
+Transfer the folder /data containing **Duke** .txt into the directory of your other computer that contains ip.jar. 
+The application will look out for the **Duke** .txt within that /data folder and fetch the tasks from there.
 
 ## Command Summary
 
