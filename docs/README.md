@@ -44,10 +44,15 @@ their busy schedules by tracking their important tasks.
   `todo maths quiz`.
 * If a feature requires you to indicate a `DATE` or `TIME`, they
   must be typed in the format specified below. Duke is unable to process
-  other `DATE` or `TIME` formats.
+  other `DATE` and `TIME` formats.
   
-  * `DATE`: DD/MM/YYYY
-  * `TIME`: HH:MM
+  * `DATE`: `DD/MM/YYYY`
+    * Insert the date, followed by the month and the year, with a forward slash `/` between
+    each segment.
+    * eg. 25/10/2020
+  * `TIME`: `HH:MM`
+    * Insert the time in the `24h` time format, with a semicolon `:` between the hours and minutes.
+    * eg. 16:50
 
 </div>
 
