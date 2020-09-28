@@ -17,9 +17,9 @@ their busy schedules by tracking their important tasks.
 
 ## Quick Start 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest ip.jar from [here](https://github.com/theopin/ip/releases).
+2. Download the latest `ip.jar` from [here](https://github.com/theopin/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for your program.
-4. Use java -jar ip.jar to run the program. A welcome message should appear as shown below.
+4. Use `java -jar ip.jar` to run the program. A welcome message should appear as shown below.
 
 ```
 	____________________________________________________________
@@ -234,7 +234,7 @@ after any command that changes it is given. There is no need to save manually.
 ## FAQ
 
 ### Q: How do I transfer my data to another computer?
-Transfer the folder `/data` containing `duke.txt` into the directory of your other computer that contains ip.jar. 
+Transfer the folder `/data` containing `duke.txt` into the directory of your other computer that contains `ip.jar`. 
 The application will look out for the `duke.txt` within that `/data` folder and fetch the tasks from there.
 
 ## Command Summary
