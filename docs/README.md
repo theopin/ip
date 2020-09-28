@@ -234,8 +234,8 @@ after any command that changes it is given. There is no need to save manually.
 ## FAQ
 
 ### Q: How do I transfer my data to another computer?
-Transfer the folder /data containing **Duke** .txt into the directory of your other computer that contains ip.jar. 
-The application will look out for the **Duke** .txt within that /data folder and fetch the tasks from there.
+Transfer the folder `/data` containing `duke.txt` into the directory of your other computer that contains ip.jar. 
+The application will look out for the `duke.txt` within that `/data` folder and fetch the tasks from there.
 
 ## Command Summary
 
